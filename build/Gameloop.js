@@ -41,7 +41,6 @@ export default class GameLoop {
         if (this.isInState(GameLoop.STATE_STARTING)) {
             this.state = GameLoop.STATE_RUNNING;
         }
-        this.game.processInput();
         this.game.render();
         const now = performance.now();
         const stepTime = timestamp - now;

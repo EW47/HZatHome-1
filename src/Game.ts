@@ -1,5 +1,4 @@
-import KeyListener from './KeyListener.js';
-import GameLoop from './GameLoop.js';
+import KeyboardListener from './KeyboardListener.js';
 
 export default class Game {
   // Necessary canvas attributes
@@ -7,22 +6,11 @@ export default class Game {
 
   private readonly ctx: CanvasRenderingContext2D;
 
-  private engine: GameLoop;
-
   // KeyboardListener so the player can move
-  private keyboard: KeyListener;
+  private keyBoardListener: KeyboardListener;
 
   // Player
   private player: any; // TODO switch to correct type
-
-  private countdownToCoinSpawn: number;
-
-  /**
-   * State of the player.
-   * Moving: player is moving on the bottom of the screen.
-   * Hyperjump: player is jumping for a coin
-   */
-  private playerState: string;
 
   /**
    * Initialize the game
@@ -31,46 +19,43 @@ export default class Game {
    * should be rendered upon
    */
   public constructor(canvas: HTMLCanvasElement) {
+
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
 
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
 
-    this.keyboard = new KeyListener();
+    this.keyBoardListener = new KeyboardListener();
 
-    this.playerState = 'moving';
-
-    // Create player
-    this.player = {
-      img: Game.loadNewImage('./assets/img/player.png'),
-      xPos: 680,
-      yPos: 950,
-    };
+    this.player = this.createPlayer('Me');    
 
     // Start the game cycle
-    this.engine = new GameLoop(this);
-    this.engine.start();
+    this.loop();
   }
 
-  /**
-   * Handles any user input that has happened since the last call
+/**
+   * Method for the Game Loop
    */
-  public processInput(): void {
-    // Using the space bar to jump for a coin
-    if (this.keyboard.isKeyDown(KeyListener.KEY_SPACE)) {
-      this.playerState = 'hyperjump';
-      this.player.yPos = 50;
-    }
+ public loop = (): void => {
 
-    // If de player wants to go down to the bottom of the screen press down arrow
-    if (
-      this.keyboard.isKeyDown(KeyListener.KEY_DOWN) && this.playerState === 'hyperjump'
-    ) {
-      this.playerState = 'moving';
-      this.player.yPos = this.canvas.height - 260;
-    }
+  this.render();
+
+  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
+    this.player.xPos -= this.player.speed;
   }
+  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_RIGHT)) {
+    this.player.xPos += this.player.speed;
+  }
+  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_UP)) {
+    this.player.yPos -= this.player.speed;
+  }
+  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
+    this.player.yPos += this.player.speed;
+  }
+
+  requestAnimationFrame(this.loop);
+};
 
   /**
    * Draw the game so the player can see what happened
@@ -84,59 +69,23 @@ export default class Game {
     this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
   }
 
-/**
-   * Advances the game simulation one step. It may run AI and physics (usually
-   * in that order)
+  /**
+   * Method to create a player object
    *
-   * @param elapsed the time in ms that has been elapsed since the previous
-   *   call
-   * @returns `true` if the game should stop animation
+   * @param name - name of the player
+   * @returns player - player object
    */
-  public update(elapsed: number): void {
-  this.movePlayer();
+   public createPlayer(name: string): any {
+    return {
+      name: name,
+      img: Game.loadNewImage('./assets/img/player.png'),
+      xPos: 680,
+      yPos: 950,
+      speed: 4,
+    };
   }
 
-  /**
-   * Moves the player depending on which arrow key is pressed. Player is bound
-   * to the canvas and cannot move outside of it
-   */
-  private movePlayer() {
-    // Player is automaticly moving from left to right
-    if (this.playerState === 'moving') {
-      if (
-        this.player.xPos + this.player.img.width >= this.canvas.width || this.player.xPos < 0
-      ) {
-        this.player.xVel = -this.player.xVel;
-      }
-      this.player.xPos += this.player.xVel;
-    }
-  }
-
-  /**
-   * Writes text to the canvas
-   *
-   * @param text - Text to write
-   * @param fontSize - Font size in pixels
-   * @param xCoordinate - Horizontal coordinate in pixels
-   * @param yCoordinate - Vertical coordinate in pixels
-   * @param alignment - Where to align the text
-   * @param color - The color of the text
-   */
-  public writeTextToCanvas(
-    text: string,
-    fontSize: number = 20,
-    xCoordinate: number,
-    yCoordinate: number,
-    alignment: CanvasTextAlign = 'center',
-    color: string = 'white',
-  ): void {
-    this.ctx.font = `${fontSize}px sans-serif`;
-    this.ctx.fillStyle = color;
-    this.ctx.textAlign = alignment;
-    this.ctx.fillText(text, xCoordinate, yCoordinate);
-  }
-
-  /**
+ /**
    * Method to load an image
    *
    * @param source the source
