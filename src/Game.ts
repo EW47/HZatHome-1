@@ -79,8 +79,8 @@ export default class Game {
     return {
       name: name,
       img: Game.loadNewImage('./assets/img/player.png'),
-      xPos: 680,
-      yPos: 950,
+      xPos: 270,
+      yPos: 450,
       speed: 4,
     };
   }
