@@ -33,6 +33,7 @@ export default class Game {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
+        this.writeTextToCanvas('Score: 0', 36, 120, 50);
     }
     createPlayer(name) {
         return {
@@ -50,6 +51,12 @@ export default class Game {
     }
     static randomNumber(min, max) {
         return Math.round(Math.random() * (max - min) + min);
+    }
+    writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = 'center', color = 'white') {
+        this.ctx.font = `${fontSize}px sans-serif`;
+        this.ctx.fillStyle = color;
+        this.ctx.textAlign = alignment;
+        this.ctx.fillText(text, xCoordinate, yCoordinate);
     }
 }
 //# sourceMappingURL=Game.js.map

@@ -67,6 +67,8 @@ export default class Game {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     // draw player
     this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
+
+    this.writeTextToCanvas('Score: 0', 36, 120, 50);
   }
 
   /**
@@ -107,4 +109,28 @@ export default class Game {
   public static randomNumber(min: number, max: number): number {
     return Math.round(Math.random() * (max - min) + min);
   }
+  /**
+   * Writes text to the canvas
+   *
+   * @param text - Text to write
+   * @param fontSize - Font size in pixels
+   * @param xCoordinate - Horizontal coordinate in pixels
+   * @param yCoordinate - Vertical coordinate in pixels
+   * @param alignment - Where to align the text
+   * @param color - The color of the text
+   */
+   public writeTextToCanvas(
+    text: string,
+    fontSize: number = 20,
+    xCoordinate: number,
+    yCoordinate: number,
+    alignment: CanvasTextAlign = 'center',
+    color: string = 'white',
+  ): void {
+    this.ctx.font = `${fontSize}px sans-serif`;
+    this.ctx.fillStyle = color;
+    this.ctx.textAlign = alignment;
+    this.ctx.fillText(text, xCoordinate, yCoordinate);
+  }
+
 }
