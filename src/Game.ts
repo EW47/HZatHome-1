@@ -69,6 +69,7 @@ export default class Game {
     this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
 
     this.writeTextToCanvas('Score: 0', 36, 120, 50);
+    this.writeTextToCanvas('Health: 100', 36, 1750, 50);
   }
 
   /**
