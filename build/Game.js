@@ -4,6 +4,7 @@ export default class Game {
     ctx;
     keyBoardListener;
     player;
+    enemy;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
@@ -11,6 +12,7 @@ export default class Game {
         this.canvas.height = window.innerHeight;
         this.keyBoardListener = new KeyboardListener();
         this.player = this.createPlayer('Me');
+        this.enemy = this.createGmailEnemy('Gmail');
         this.loop();
     }
     loop = () => {
@@ -33,16 +35,25 @@ export default class Game {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
+        this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
         this.writeTextToCanvas('Score: 0', 36, 120, 50);
         this.writeTextToCanvas('Health: 100', 36, 1750, 50);
     }
     createPlayer(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/player.png'),
+            img: Game.loadNewImage('./assets/img/BackgroundEraser1642075722472_50.png'),
             xPos: 270,
             yPos: 450,
             speed: 4,
+        };
+    }
+    createGmailEnemy(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
+            xPos: 650,
+            yPos: 0,
         };
     }
     static loadNewImage(source) {

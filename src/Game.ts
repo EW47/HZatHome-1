@@ -12,6 +12,9 @@ export default class Game {
   // Player
   private player: any; // TODO switch to correct type
 
+  //Enemy
+  private enemy: any; // TODO switch to correct type
+
   /**
    * Initialize the game
    *
@@ -28,7 +31,8 @@ export default class Game {
 
     this.keyBoardListener = new KeyboardListener();
 
-    this.player = this.createPlayer('Me');    
+    this.player = this.createPlayer('Me');
+    this.enemy = this.createGmailEnemy('Gmail');
 
     // Start the game cycle
     this.loop();
@@ -67,6 +71,8 @@ export default class Game {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     // draw player
     this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
+    //draw enemy
+    this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
 
     this.writeTextToCanvas('Score: 0', 36, 120, 50);
     this.writeTextToCanvas('Health: 100', 36, 1750, 50);
@@ -81,12 +87,27 @@ export default class Game {
    public createPlayer(name: string): any {
     return {
       name: name,
-      img: Game.loadNewImage('./assets/img/player.png'),
+      img: Game.loadNewImage('./assets/img/BackgroundEraser1642075722472_50.png'),
       xPos: 270,
       yPos: 450,
       speed: 4,
     };
   }
+
+/**
+   * Method to create a enemy object
+   *
+   * @param name - name of the enemy
+   * @returns enemy- enemy object
+   */
+ public createGmailEnemy(name: string): any {
+  return {
+    name: name,
+    img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
+    xPos: 650,
+    yPos: 0,
+  };
+}
 
  /**
    * Method to load an image
