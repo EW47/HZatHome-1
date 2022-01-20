@@ -36,6 +36,8 @@ export default class Game {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
         this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
+        this.drawUIRect(1.6, 1.7, 2, 5);
+        this.drawUICircle(1.45, 1.55, '');
         this.writeTextToCanvas('Score: 0', 36, 120, 50);
         this.writeTextToCanvas('Health: 100', 36, 1750, 50);
     }
@@ -69,6 +71,28 @@ export default class Game {
         this.ctx.fillStyle = color;
         this.ctx.textAlign = alignment;
         this.ctx.fillText(text, xCoordinate, yCoordinate);
+    }
+    drawUIRect(xCoordinate, yCoordinate, width, length, alignment = 'center', color = 'black') {
+        this.ctx.lineWidth = 10;
+        this.ctx.fillStyle = "white";
+        this.ctx.strokeStyle = "black";
+        this.ctx.textAlign = alignment;
+        this.ctx.beginPath();
+        this.ctx.rect(1080 / xCoordinate, 1080 / yCoordinate, 1080 / width, 1080 / length);
+        this.ctx.fill();
+        this.ctx.stroke();
+    }
+    drawUICircle(xCoordinate, yCoordinate, CircleID) {
+        this.ctx.lineWidth = 10;
+        this.ctx.fillStyle = "white";
+        this.ctx.strokeStyle = "black";
+        this.ctx.beginPath();
+        this.ctx.arc(1080 / xCoordinate, 1080 / yCoordinate, 1080 / 35, 0, 2 * Math.PI, false);
+        this.ctx.stroke();
+        this.ctx.fill();
+        this.ctx.fillStyle = "black";
+        this.ctx.font = `px Arial`;
+        this.ctx.fillText(CircleID, 1080 / xCoordinate, 1080 / 54, 1080 / yCoordinate + (1080 / 54));
     }
 }
 //# sourceMappingURL=Game.js.map
