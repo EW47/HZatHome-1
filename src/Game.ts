@@ -75,11 +75,26 @@ export default class Game {
     //draw enemy
     this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
 
-    this.drawUIRect(1.6, 1.7, 2, 5);
+    //draw rectangle
+    this.drawUIRect(1.8, 1.7, 1.5, 5);
 
-    this.drawUICircle(1.45, 1.55, '');
+    this.drawUICircle(1.26, 1.1, '');
+    this.drawUICircle(1.26, 1, '');
 
+    //Question
+    this.writeTextToCanvas('Je doet online een quiz die de toekomst voorspelt. Echter vraagt de quiz om de naam',18, 960, 670);
+    this.writeTextToCanvas('van je vader in te  vullen en je geboortedatum. Wat doe je? ',18, 860, 690);
+
+    //Answer A
+    this.writeTextToCanvas('Ik vul de gegevens in en zie wat de toekomst brengt.',16, 855, 730);
+
+    //Answer B
+    this.writeTextToCanvas('Ik sluit de quiz en doe hier niet aan mee',16, 810, 805);
+
+    //Score
     this.writeTextToCanvas('Score: 0', 36, 120, 50);
+    
+    //Health
     this.writeTextToCanvas('Health: 100', 36, 1750, 50);
   }
 
@@ -152,7 +167,7 @@ export default class Game {
     xCoordinate: number,
     yCoordinate: number,
     alignment: CanvasTextAlign = 'center',
-    color: string = 'white',
+    color: string = 'black',
   ): void {
     this.ctx.font = `${fontSize}px sans-serif`;
     this.ctx.fillStyle = color;
@@ -177,7 +192,7 @@ export default class Game {
     alignment: CanvasTextAlign = 'center',
     color: string = 'black',
   ): void {
-    this.ctx.lineWidth = 10;
+    this.ctx.lineWidth = 8;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
     this.ctx.textAlign = alignment;
@@ -199,11 +214,11 @@ export default class Game {
     yCoordinate: number,
     CircleID: string,
   ): void {
-    this.ctx.lineWidth = 10;
+    this.ctx.lineWidth = 8;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
     this.ctx.beginPath();
-    this.ctx.arc(1080 / xCoordinate, 1080 / yCoordinate, 1080 / 35, 0, 2 * Math.PI, false);
+    this.ctx.arc(800 / xCoordinate, 800 / yCoordinate, 800 / 35, 0, 2 * Math.PI, false);
     this.ctx.stroke();
     this.ctx.fill();
     this.ctx.fillStyle = "black";
