@@ -38,28 +38,28 @@ export default class Game {
     this.loop();
   }
 
-/**
-   * Method for the Game Loop
-   */
- public loop = (): void => {
+  /**
+     * Method for the Game Loop
+     */
+  public loop = (): void => {
 
-  this.render();
+    this.render();
 
-  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
-    this.player.xPos -= this.player.speed;
-  }
-  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_RIGHT)) {
-    this.player.xPos += this.player.speed;
-  }
-  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_UP)) {
-    this.player.yPos -= this.player.speed;
-  }
-  if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
-    this.player.yPos += this.player.speed;
-  }
+    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
+      this.player.xPos -= this.player.speed;
+    }
+    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_RIGHT)) {
+      this.player.xPos += this.player.speed;
+    }
+    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_UP)) {
+      this.player.yPos -= this.player.speed;
+    }
+    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
+      this.player.yPos += this.player.speed;
+    }
 
-  requestAnimationFrame(this.loop);
-};
+    requestAnimationFrame(this.loop);
+  };
 
   /**
    * Draw the game so the player can see what happened
@@ -69,10 +69,15 @@ export default class Game {
     const ctx = this.canvas.getContext('2d');
     // Clear the entire canvas
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
     // draw player
     this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
     //draw enemy
     this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
+
+    this.drawUIRect(1.6, 1.7, 2, 5);
+
+    this.drawUICircle(1.45, 1.55, '');
 
     this.writeTextToCanvas('Score: 0', 36, 120, 50);
     this.writeTextToCanvas('Health: 100', 36, 1750, 50);
@@ -84,7 +89,7 @@ export default class Game {
    * @param name - name of the player
    * @returns player - player object
    */
-   public createPlayer(name: string): any {
+  public createPlayer(name: string): any {
     return {
       name: name,
       img: Game.loadNewImage('./assets/img/BackgroundEraser1642075722472_50.png'),
@@ -94,27 +99,27 @@ export default class Game {
     };
   }
 
-/**
-   * Method to create a enemy object
-   *
-   * @param name - name of the enemy
-   * @returns enemy- enemy object
-   */
- public createGmailEnemy(name: string): any {
-  return {
-    name: name,
-    img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
-    xPos: 650,
-    yPos: 0,
-  };
-}
+  /**
+     * Method to create a enemy object
+     *
+     * @param name - name of the enemy
+     * @returns enemy- enemy object
+     */
+  public createGmailEnemy(name: string): any {
+    return {
+      name: name,
+      img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
+      xPos: 650,
+      yPos: 0,
+    };
+  }
 
- /**
-   * Method to load an image
-   *
-   * @param source the source
-   * @returns HTMLImageElement - returns an image
-   */
+  /**
+    * Method to load an image
+    *
+    * @param source the source
+    * @returns HTMLImageElement - returns an image
+    */
   public static loadNewImage(source: string): HTMLImageElement {
     const img = new Image();
     img.src = source;
@@ -141,7 +146,7 @@ export default class Game {
    * @param alignment - Where to align the text
    * @param color - The color of the text
    */
-   public writeTextToCanvas(
+  public writeTextToCanvas(
     text: string,
     fontSize: number = 20,
     xCoordinate: number,
@@ -155,4 +160,54 @@ export default class Game {
     this.ctx.fillText(text, xCoordinate, yCoordinate);
   }
 
+  /**
+   * Creates a rectangle for the ui
+   *
+   * @param xCoordinate - Horizontal coordinate in pixels
+   * @param yCoordinate - Vertical coordinate in pixels
+   * @param width - Width of rectangle
+   * @param length - Length of rectangle
+   * @param alignment - Where to align the text
+   */
+  public drawUIRect(
+    xCoordinate: number,
+    yCoordinate: number,
+    width: number,
+    length: number,
+    alignment: CanvasTextAlign = 'center',
+    color: string = 'black',
+  ): void {
+    this.ctx.lineWidth = 10;
+    this.ctx.fillStyle = "white";
+    this.ctx.strokeStyle = "black";
+    this.ctx.textAlign = alignment;
+    this.ctx.beginPath();
+    this.ctx.rect(1080 / xCoordinate, 1080 / yCoordinate, 1080 / width, 1080 / length);
+    this.ctx.fill();
+    this.ctx.stroke();
+  }
+
+  /**
+   * Creates a rectangle for the ui
+   *
+   * @param xCoordinate - Horizontal coordinate in pixels
+   * @param yCoordinate - Vertical coordinate in pixels
+   * @param CircleID - Id of circle
+   */
+  public drawUICircle(
+    xCoordinate: number,
+    yCoordinate: number,
+    CircleID: string,
+  ): void {
+    this.ctx.lineWidth = 10;
+    this.ctx.fillStyle = "white";
+    this.ctx.strokeStyle = "black";
+    this.ctx.beginPath();
+    this.ctx.arc(1080 / xCoordinate, 1080 / yCoordinate, 1080 / 35, 0, 2 * Math.PI, false);
+    this.ctx.stroke();
+    this.ctx.fill();
+    this.ctx.fillStyle = "black";
+    this.ctx.font = `px Arial`;
+    this.ctx.fillText(CircleID, 1080 / xCoordinate, 1080 / 54, 1080 / yCoordinate + (1080 / 54));
+  }
 }
