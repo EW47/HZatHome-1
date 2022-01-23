@@ -26,6 +26,14 @@
 
   public static readonly KEY_E = 69;
 
+  public static readonly KEY_F = 70;
+
+  public static readonly KEY_C = 67;
+
+  public static readonly KEY_1 = 49;
+
+  public static readonly KEY_2 = 50;
+
   // Array that holds the state of all keys
   private keyCodeStates: boolean[];
 
