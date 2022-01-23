@@ -40,7 +40,7 @@ export default class Monster {
             yPos: 0,
         };
     }
-    changeCharacter(name) {
+    changeMonster(name) {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_F)) {
             return {
                 name: name,
