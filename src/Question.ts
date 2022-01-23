@@ -20,6 +20,14 @@ export default class Question {
         this.question = this.createQuestion('GmailQuestion');
     }
 
+    public getQuestion(): any {
+        return this.question;
+    }
+
+    public setQuestion(question: any): void {
+        this.question = question;
+    }
+
     /**
    * Draw the game so the player can see what happened
    */

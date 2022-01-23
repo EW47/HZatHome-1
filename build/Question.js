@@ -11,6 +11,12 @@ export default class Question {
         this.canvas.height = window.innerHeight;
         this.question = this.createQuestion('GmailQuestion');
     }
+    getQuestion() {
+        return this.question;
+    }
+    setQuestion(question) {
+        this.question = question;
+    }
     render() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
