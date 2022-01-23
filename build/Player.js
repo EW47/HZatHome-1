@@ -1,92 +1,62 @@
 import KeyboardListener from './KeyboardListener.js';
-
 export default class Player {
-
-    private healthImage: any;
-
-    private health: object;
-
-    private image: any;
-
-    private speed: number;
-
-    private xPosition: number;
-
-    private yPosition: number;
-
-    private name: string;
-
-    private keyBoardListener: KeyboardListener;
-
-    private score: object;
-
-    public constructor(name: string) {
-
+    healthImage;
+    health;
+    image;
+    speed;
+    xPosition;
+    yPosition;
+    name;
+    keyBoardListener;
+    score;
+    constructor(name) {
         this.createPlayer('me');
         this.changeCharacter('choose the character');
         this.keyBoardListener = new KeyboardListener();
     }
-
-    public getHealthImage(): any {
+    getHealthImage() {
         return this.healthImage;
     }
-
-    public setHealthImage(healthImage: any): void {
+    setHealthImage(healthImage) {
         this.healthImage = healthImage;
     }
-
-    public getHealth(): object {
+    getHealth() {
         return this.health;
     }
-
-    public setHealth(health: object): void {
+    setHealth(health) {
         this.health = health;
     }
-
-    public getSpeed(): number {
+    getSpeed() {
         return this.speed;
     }
-
-    public setSpeed(speed: number): void {
+    setSpeed(speed) {
         this.speed = speed;
     }
-
-    public getxPosition(): number {
+    getxPosition() {
         return this.xPosition;
     }
-
-    public setxPosition(xPosition: number): void {
+    setxPosition(xPosition) {
         this.xPosition = xPosition;
     }
-
-    public getyPosition(): number {
+    getyPosition() {
         return this.yPosition;
     }
-
-    public setyPosition(yPosition: number): void {
+    setyPosition(yPosition) {
         this.yPosition = yPosition;
     }
-
-    public getImage(): any {
+    getImage() {
         return this.image;
     }
-
-    public setImage(image: any): void {
+    setImage(image) {
         this.image = image;
     }
-
-    public getName(): string {
+    getName() {
         return this.name;
     }
-
-    public setName(name: string): void {
+    setName(name) {
         this.name = name;
     }
-
-    /**
-   * Method to move the player on the canvas
-   */
-    public move(): void {
+    move() {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
             this.setxPosition(this.getxPosition() - this.getSpeed());
         }
@@ -100,14 +70,7 @@ export default class Player {
             this.setyPosition(this.getyPosition() + this.getSpeed());
         }
     }
-
-    /**
-   * Method to create a player object
-   *
-   * @param name - name of the player
-   * @returns player - player object
-   */
-    public createPlayer(name: string): any {
+    createPlayer(name) {
         return {
             name: name,
             image: Player.loadNewImage('./assets/img/player1.png'),
@@ -116,14 +79,7 @@ export default class Player {
             speed: 4,
         };
     }
-
-    /**
-   * Method to change the main Character you'd like to play as 
-   *
-   * @param name - name of the player
-   * @returns player - player object
-   */
-    public changeCharacter(name: string): any {
+    changeCharacter(name) {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_1)) {
             return {
                 name: name,
@@ -132,7 +88,8 @@ export default class Player {
                 yPosition: 450,
                 speed: 4,
             };
-        } else if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_2)) {
+        }
+        else if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_2)) {
             return {
                 name: name,
                 image: Player.loadNewImage('./assets/img/Charter2.png'),
@@ -142,24 +99,13 @@ export default class Player {
             };
         }
     }
-
-    protected static loadNewImage(source: string): HTMLImageElement {
+    static loadNewImage(source) {
         const img = new Image();
         img.src = source;
         return img;
     }
-
-    /**
-     * Generates a random integer number between min and max
-     *
-     * NOTE: this is a 'static' method. This means that this method must be called like
-     * `Game.randomInteger()` instead of `this.randomInteger()`.
-     *
-     * @param min - minimal time
-     * @param max - maximal time
-     * @returns a random integer number between min and max
-     */
-    protected static randomInteger(min: number, max: number): number {
+    static randomInteger(min, max) {
         return Math.round(Math.random() * (max - min) + min);
     }
 }
+//# sourceMappingURL=Player.js.map
