@@ -18,8 +18,6 @@ export default class Game {
   //Question
   private question: any;
 
-  private howtoplay: any;
-
   /**
    * Initialize the game
    *
@@ -39,7 +37,6 @@ export default class Game {
     this.player = this.createPlayer('Me');
     this.enemy = this.createGmailEnemy('Gmail');
     this.question = this.createQuestion('GmailQuestion');
-    this.howtoplay = this.createHowToPlay('HowToPlay');
 
     // Start the game cycle
     this.loop();
@@ -88,8 +85,6 @@ export default class Game {
     //Draw Question
     this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
 
-    this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
-
     //Score
     this.writeTextToCanvas('Score: 0', 36, 120, 50);
 
@@ -107,8 +102,8 @@ export default class Game {
     return {
       name: name,
       img: Game.loadNewImage('./assets/img/character.png'),
-      xPos: 850,
-      yPos: 600,
+      xPos: 600,
+      yPos: 450,
       speed: 4,
     };
   }
@@ -127,7 +122,6 @@ export default class Game {
       yPos: 0,
     };
   }
-
   /**
      * Method to create a question object
      *
@@ -139,23 +133,8 @@ export default class Game {
       name: name,
       img: Game.loadNewImage('./assets/img/question3.png'),
       xPos: -1000,
-      yPos: 650,
+      yPos: 200,
     };
-  }
-
-  /**
-     * Method to create a HowToPlay object
-     *
-     * @param name - name of the howToPlay
-     * @returns question- question object
-     */
-  public createHowToPlay(name: string): any {
-    return {
-      name: name,
-      img: Game.loadNewImage('./assets/img/howtoplay.png'),
-      xPos: 1660,
-      yPos: 75,
-    }
   }
 
   /**
