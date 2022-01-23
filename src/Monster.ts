@@ -70,7 +70,7 @@ export default class Monster {
   * @param name - name of the Monster
   * @returns monster - monster object
   */
-  public changeCharacter(name: string): any {
+  public changeMonster(name: string): any {
     if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_F)) {
       return {
         name: name,
