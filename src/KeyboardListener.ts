@@ -24,6 +24,8 @@
 
   public static readonly KEY_R = 82;
 
+  public static readonly KEY_E = 69;
+
   // Array that holds the state of all keys
   private keyCodeStates: boolean[];
 
@@ -64,4 +66,8 @@
   private keyUp = (ev: KeyboardEvent) => {
     this.keyCodeStates[ev.keyCode] = false;
   };
+
+  private isKeyPressed (keyCode: number): boolean {
+    return this.keyCodeStates["69"] == true;
+  }
 }

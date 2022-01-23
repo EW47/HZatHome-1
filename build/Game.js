@@ -5,6 +5,7 @@ export default class Game {
     keyBoardListener;
     player;
     enemy;
+    question;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
@@ -13,6 +14,7 @@ export default class Game {
         this.keyBoardListener = new KeyboardListener();
         this.player = this.createPlayer('Me');
         this.enemy = this.createGmailEnemy('Gmail');
+        this.question = this.createQuestion('GmailQuestion');
         this.loop();
     }
     loop = () => {
@@ -29,6 +31,7 @@ export default class Game {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
             this.player.yPos += this.player.speed;
         }
+        this.processInput();
         requestAnimationFrame(this.loop);
     };
     render() {
@@ -36,21 +39,15 @@ export default class Game {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
         this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
-        this.drawUIRect(1.8, 1.7, 1.5, 5);
-        this.drawUICircle(1.26, 1.1, '');
-        this.drawUICircle(1.26, 1, '');
-        this.writeTextToCanvas('Je doet online een quiz die de toekomst voorspelt. Echter vraagt de quiz om de naam', 18, 960, 670);
-        this.writeTextToCanvas('van je vader in te  vullen en je geboortedatum. Wat doe je? ', 18, 860, 690);
-        this.writeTextToCanvas('Ik vul de gegevens in en zie wat de toekomst brengt.', 16, 855, 730);
-        this.writeTextToCanvas('Ik sluit de quiz en doe hier niet aan mee', 16, 810, 805);
+        this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
         this.writeTextToCanvas('Score: 0', 36, 120, 50);
         this.writeTextToCanvas('Health: 100', 36, 1750, 50);
     }
     createPlayer(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/BackgroundEraser1642075722472_50.png'),
-            xPos: 270,
+            img: Game.loadNewImage('./assets/img/character.png'),
+            xPos: 600,
             yPos: 450,
             speed: 4,
         };
@@ -58,9 +55,17 @@ export default class Game {
     createGmailEnemy(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
+            img: Game.loadNewImage('./assets/img/monster.png'),
             xPos: 650,
             yPos: 0,
+        };
+    }
+    createQuestion(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/question3.png'),
+            xPos: -1000,
+            yPos: 200,
         };
     }
     static loadNewImage(source) {
@@ -98,6 +103,11 @@ export default class Game {
         this.ctx.fillStyle = "black";
         this.ctx.font = `px Arial`;
         this.ctx.fillText(CircleID, 1080 / xCoordinate, 1080 / 54, 1080 / yCoordinate + (1080 / 54));
+    }
+    processInput() {
+        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_E)) {
+            this.question.xPos = 600;
+        }
     }
 }
 //# sourceMappingURL=Game.js.map

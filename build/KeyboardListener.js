@@ -5,6 +5,7 @@ export default class KeyboardListener {
     static KEY_RIGHT = 39;
     static KEY_DOWN = 40;
     static KEY_R = 82;
+    static KEY_E = 69;
     keyCodeStates;
     constructor() {
         this.keyCodeStates = new Array();
@@ -20,5 +21,8 @@ export default class KeyboardListener {
     keyUp = (ev) => {
         this.keyCodeStates[ev.keyCode] = false;
     };
+    isKeyPressed(keyCode) {
+        return this.keyCodeStates["69"] == true;
+    }
 }
 //# sourceMappingURL=KeyboardListener.js.map
