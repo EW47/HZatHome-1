@@ -1,4 +1,6 @@
 import KeyboardListener from './KeyboardListener.js';
+import Monster from './Monster.js';
+import Player from './Player.js';
 
 export default class Game {
   // Necessary canvas attributes
@@ -10,10 +12,10 @@ export default class Game {
   private keyBoardListener: KeyboardListener;
 
   // Player
-  private player: any; // TODO switch to correct type
+  private Player: any; // TODO switch to correct type
 
-  //Enemy
-  private enemy: any; // TODO switch to correct type
+  //Monster
+  private Monster: any; // TODO switch to correct type
 
   /**
    * Initialize the game
@@ -31,8 +33,8 @@ export default class Game {
 
     this.keyBoardListener = new KeyboardListener();
 
-    this.player = this.createPlayer('Me');
-    this.enemy = this.createGmailEnemy('Gmail');
+    this.Player = new Player('Me');
+    this.Monster = new Monster('Gmail', 100, 20);
 
     // Start the game cycle
     this.loop();
@@ -42,22 +44,7 @@ export default class Game {
      * Method for the Game Loop
      */
   public loop = (): void => {
-
     this.render();
-
-    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
-      this.player.xPos -= this.player.speed;
-    }
-    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_RIGHT)) {
-      this.player.xPos += this.player.speed;
-    }
-    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_UP)) {
-      this.player.yPos -= this.player.speed;
-    }
-    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
-      this.player.yPos += this.player.speed;
-    }
-
     requestAnimationFrame(this.loop);
   };
 
@@ -71,9 +58,9 @@ export default class Game {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // draw player
-    this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
-    //draw enemy
-    this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
+    this.ctx.drawImage(this.Player.img, this.Player.xPos, this.Player.yPos);
+    //draw Monster
+    this.ctx.drawImage(this.Monster.img, this.Monster.xPos, this.Monster.yPos);
 
     //draw rectangle
     this.drawUIRect(1.8, 1.7, 1.5, 5);
@@ -96,37 +83,6 @@ export default class Game {
     
     //Health
     this.writeTextToCanvas('Health: 100', 36, 1750, 50);
-  }
-
-  /**
-   * Method to create a player object
-   *
-   * @param name - name of the player
-   * @returns player - player object
-   */
-  public createPlayer(name: string): any {
-    return {
-      name: name,
-      img: Game.loadNewImage('./assets/img/BackgroundEraser1642075722472_50.png'),
-      xPos: 270,
-      yPos: 450,
-      speed: 4,
-    };
-  }
-
-  /**
-     * Method to create a enemy object
-     *
-     * @param name - name of the enemy
-     * @returns enemy- enemy object
-     */
-  public createGmailEnemy(name: string): any {
-    return {
-      name: name,
-      img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
-      xPos: 650,
-      yPos: 0,
-    };
   }
 
   /**

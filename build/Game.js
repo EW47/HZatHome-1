@@ -1,41 +1,31 @@
 import KeyboardListener from './KeyboardListener.js';
+import Monster from './Monster.js';
+import Player from './Player.js';
 export default class Game {
     canvas;
     ctx;
     keyBoardListener;
-    player;
-    enemy;
+    Player;
+    Monster;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.keyBoardListener = new KeyboardListener();
-        this.player = this.createPlayer('Me');
-        this.enemy = this.createGmailEnemy('Gmail');
+        this.Player = new Player('Me');
+        this.Monster = new Monster('Gmail', 100, 20);
         this.loop();
     }
     loop = () => {
         this.render();
-        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
-            this.player.xPos -= this.player.speed;
-        }
-        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_RIGHT)) {
-            this.player.xPos += this.player.speed;
-        }
-        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_UP)) {
-            this.player.yPos -= this.player.speed;
-        }
-        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
-            this.player.yPos += this.player.speed;
-        }
         requestAnimationFrame(this.loop);
     };
     render() {
         const ctx = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
-        this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
+        this.ctx.drawImage(this.Player.img, this.Player.xPos, this.Player.yPos);
+        this.ctx.drawImage(this.Monster.img, this.Monster.xPos, this.Monster.yPos);
         this.drawUIRect(1.8, 1.7, 1.5, 5);
         this.drawUICircle(1.26, 1.1, '');
         this.drawUICircle(1.26, 1, '');
@@ -45,23 +35,6 @@ export default class Game {
         this.writeTextToCanvas('Ik sluit de quiz en doe hier niet aan mee', 16, 810, 805);
         this.writeTextToCanvas('Score: 0', 36, 120, 50);
         this.writeTextToCanvas('Health: 100', 36, 1750, 50);
-    }
-    createPlayer(name) {
-        return {
-            name: name,
-            img: Game.loadNewImage('./assets/img/BackgroundEraser1642075722472_50.png'),
-            xPos: 270,
-            yPos: 450,
-            speed: 4,
-        };
-    }
-    createGmailEnemy(name) {
-        return {
-            name: name,
-            img: Game.loadNewImage('./assets/img/20220113_095925_50.png'),
-            xPos: 650,
-            yPos: 0,
-        };
     }
     static loadNewImage(source) {
         const img = new Image();
