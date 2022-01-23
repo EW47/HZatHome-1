@@ -6,6 +6,7 @@ export default class Game {
     player;
     enemy;
     question;
+    howtoplay;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
@@ -15,6 +16,7 @@ export default class Game {
         this.player = this.createPlayer('Me');
         this.enemy = this.createGmailEnemy('Gmail');
         this.question = this.createQuestion('GmailQuestion');
+        this.howtoplay = this.createHowToPlay('HowToPlay');
         this.loop();
     }
     loop = () => {
@@ -40,6 +42,7 @@ export default class Game {
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
         this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
         this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
+        this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
         this.writeTextToCanvas('Score: 0', 36, 120, 50);
         this.writeTextToCanvas('Health: 100', 36, 1750, 50);
     }
@@ -47,8 +50,8 @@ export default class Game {
         return {
             name: name,
             img: Game.loadNewImage('./assets/img/character.png'),
-            xPos: 600,
-            yPos: 450,
+            xPos: 850,
+            yPos: 600,
             speed: 4,
         };
     }
@@ -65,7 +68,15 @@ export default class Game {
             name: name,
             img: Game.loadNewImage('./assets/img/question3.png'),
             xPos: -1000,
-            yPos: 200,
+            yPos: 650,
+        };
+    }
+    createHowToPlay(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/howtoplay.png'),
+            xPos: 1660,
+            yPos: 75,
         };
     }
     static loadNewImage(source) {
