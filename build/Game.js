@@ -6,6 +6,9 @@ export default class Game {
     player;
     enemy;
     question;
+    howtoplay;
+    incorrectAnswer;
+    correctAnswer;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
@@ -15,6 +18,9 @@ export default class Game {
         this.player = this.createPlayer('Me');
         this.enemy = this.createGmailEnemy('Gmail');
         this.question = this.createQuestion('GmailQuestion');
+        this.howtoplay = this.createHowToPlay('howToPlay');
+        this.incorrectAnswer = this.createIncorrectAnswer('incorrectAnswer');
+        this.correctAnswer = this.createCorrectAnswer('correctAnswer');
         this.loop();
     }
     loop = () => {
@@ -39,16 +45,14 @@ export default class Game {
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
         this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
-        this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
-        this.writeTextToCanvas('Score: 0', 36, 120, 50);
-        this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+        this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
     }
     createPlayer(name) {
         return {
             name: name,
             img: Game.loadNewImage('./assets/img/character.png'),
-            xPos: 600,
-            yPos: 450,
+            xPos: 850,
+            yPos: 550,
             speed: 4,
         };
     }
@@ -63,9 +67,33 @@ export default class Game {
     createQuestion(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/question3.png'),
-            xPos: -1000,
-            yPos: 200,
+            img: Game.loadNewImage('./assets/img/question1.png'),
+            xPos: 600,
+            yPos: 650,
+        };
+    }
+    createHowToPlay(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/howtoplay.png'),
+            xPos: 1650,
+            yPos: 80,
+        };
+    }
+    createIncorrectAnswer(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/incorrectAnswer.png'),
+            xPos: 600,
+            yPos: 650,
+        };
+    }
+    createCorrectAnswer(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/correctAnswer.png'),
+            xPos: 600,
+            yPos: 650,
         };
     }
     static loadNewImage(source) {
@@ -82,31 +110,23 @@ export default class Game {
         this.ctx.textAlign = alignment;
         this.ctx.fillText(text, xCoordinate, yCoordinate);
     }
-    drawUIRect(xCoordinate, yCoordinate, width, length, alignment = 'center', color = 'black') {
-        this.ctx.lineWidth = 8;
-        this.ctx.fillStyle = "white";
-        this.ctx.strokeStyle = "black";
-        this.ctx.textAlign = alignment;
-        this.ctx.beginPath();
-        this.ctx.rect(1080 / xCoordinate, 1080 / yCoordinate, 1080 / width, 1080 / length);
-        this.ctx.fill();
-        this.ctx.stroke();
-    }
-    drawUICircle(xCoordinate, yCoordinate, CircleID) {
-        this.ctx.lineWidth = 8;
-        this.ctx.fillStyle = "white";
-        this.ctx.strokeStyle = "black";
-        this.ctx.beginPath();
-        this.ctx.arc(800 / xCoordinate, 800 / yCoordinate, 800 / 35, 0, 2 * Math.PI, false);
-        this.ctx.stroke();
-        this.ctx.fill();
-        this.ctx.fillStyle = "black";
-        this.ctx.font = `px Arial`;
-        this.ctx.fillText(CircleID, 1080 / xCoordinate, 1080 / 54, 1080 / yCoordinate + (1080 / 54));
-    }
     processInput() {
-        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_E)) {
-            this.question.xPos = 600;
+        if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_E)) {
+            this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
+        }
+        if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
+            this.writeTextToCanvas('Score: 10', 36, 120, 50);
+            this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
+        }
+        else {
+            this.writeTextToCanvas('Score: 0', 36, 120, 50);
+        }
+        if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
+            this.writeTextToCanvas('Health: 90', 36, 1750, 50);
+            this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
+        }
+        else {
+            this.writeTextToCanvas('Health: 100', 36, 1750, 50);
         }
     }
 }
