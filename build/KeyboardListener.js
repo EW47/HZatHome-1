@@ -6,6 +6,8 @@ export default class KeyboardListener {
     static KEY_DOWN = 40;
     static KEY_R = 82;
     static KEY_E = 69;
+    static KEY_A = 65;
+    static KEY_B = 66;
     static KEY_F = 70;
     static KEY_C = 67;
     static KEY_1 = 49;
@@ -19,14 +21,14 @@ export default class KeyboardListener {
     isKeyDown(keyCode) {
         return this.keyCodeStates[keyCode] === true;
     }
+    isKeyUp(keyCode) {
+        return this.keyCodeStates[keyCode] === false;
+    }
     keyDown = (ev) => {
         this.keyCodeStates[ev.keyCode] = true;
     };
     keyUp = (ev) => {
         this.keyCodeStates[ev.keyCode] = false;
     };
-    isKeyPressed(keyCode) {
-        return this.keyCodeStates["69"] == true;
-    }
 }
 //# sourceMappingURL=KeyboardListener.js.map

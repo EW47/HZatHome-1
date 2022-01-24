@@ -26,6 +26,10 @@
 
   public static readonly KEY_E = 69;
 
+  public static readonly KEY_A = 65;
+  
+  public static readonly KEY_B = 66;
+
   public static readonly KEY_F = 70;
 
   public static readonly KEY_C = 67;
@@ -59,6 +63,17 @@
     return this.keyCodeStates[keyCode] === true;
   }
 
+    /**
+   * Returns `true` if and only if the last known state of the keyboard
+   * reflects that the specified key is currently pressed.
+   *
+   * @param {number} keyCode the keyCode to check
+   * @returns {boolean} `true` when the specified key is currently down
+   */
+     public isKeyUp(keyCode: number): boolean {
+      return this.keyCodeStates[keyCode] === false;
+    }
+
   /*
    * Arrow method that catches keydown events
    * WARNING: DO NOT USE OR REMOVE THIS METHOD
@@ -74,8 +89,4 @@
   private keyUp = (ev: KeyboardEvent) => {
     this.keyCodeStates[ev.keyCode] = false;
   };
-
-  private isKeyPressed (keyCode: number): boolean {
-    return this.keyCodeStates["69"] == true;
-  }
 }
