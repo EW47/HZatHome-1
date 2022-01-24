@@ -27,6 +27,9 @@ export default class Game {
   //CorrectAnswer
   private correctAnswer: any;
 
+  //StartScreen
+  private startScreen: any;
+
   /**
    * Initialize the game
    *
@@ -49,6 +52,7 @@ export default class Game {
     this.howtoplay = this.createHowToPlay('howToPlay');
     this.incorrectAnswer = this.createIncorrectAnswer('incorrectAnswer');
     this.correctAnswer = this.createCorrectAnswer('correctAnswer');
+    this.startScreen = this.createStartScreen('startScreen');
 
     // Start the game cycle
     this.loop();
@@ -96,6 +100,9 @@ export default class Game {
 
     //Draw HowToPlay
     this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
+
+    //Draw StartScreen
+    this.ctx.drawImage(this.startScreen.img, this.startScreen.xPos, this.startScreen.yPos);
   }
 
   /**
@@ -158,12 +165,12 @@ export default class Game {
     }
   }
 
-   /**
-     * Method to create a GoodAnswer object
-     *
-     * @param name - name of the GoodAnswer
-     * @returns howtoplay- GoodAnswer object
-     */
+  /**
+    * Method to create a GoodAnswer object
+    *
+    * @param name - name of the GoodAnswer
+    * @returns howtoplay- GoodAnswer object
+    */
   public createIncorrectAnswer(name: string): any {
     return {
       name: name,
@@ -173,18 +180,33 @@ export default class Game {
     }
   }
 
-   /**
-     * Method to create a GoodAnswer object
-     *
-     * @param name - name of the GoodAnswer
-     * @returns howtoplay- GoodAnswer object
-     */
+  /**
+    * Method to create a GoodAnswer object
+    *
+    * @param name - name of the GoodAnswer
+    * @returns howtoplay- GoodAnswer object
+    */
   public createCorrectAnswer(name: string): any {
     return {
       name: name,
       img: Game.loadNewImage('./assets/img/correctAnswer.png'),
       xPos: 600,
       yPos: 650,
+    }
+  }
+
+  /**
+  * Method to create a startScreen object
+  *
+  * @param name - name of the startScreen
+  * @returns howtoplay- startScreen object
+  */
+  public createStartScreen(name: string): any {
+    return {
+      name: name,
+      img: Game.loadNewImage('./assets/img/finalstartscreen1920.jpg'),
+      xPos: 0,
+      yPos: 0,
     }
   }
 
@@ -244,20 +266,26 @@ export default class Game {
       this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
     }
 
-    //Adds 10 to Score when 'B' has been pressed. Otherwise show default Score. Also draws the correctAnswer image.
-    if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
-      this.writeTextToCanvas('Score: 10', 36, 120, 50);
-      this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
-    } else {
-      this.writeTextToCanvas('Score: 0', 36, 120, 50);
-    }
+    //Shows main game screen when 'Space' has been pressed.
+    //Health and Score Ifs have been put in here so that you can't see your score and health on the intro screen.
+    if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_SPACE)) {
+      this.startScreen.xPos = -3000;
 
-    //Deducts Health when 'A' has been pressed. Otherwise show default Health. Also draws the incorrectAnswer image.
-    if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
-      this.writeTextToCanvas('Health: 90', 36, 1750, 50);
-      this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
-    } else {
-      this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+      //Deducts Health when 'A' has been pressed. Otherwise show default Health. Also draws the incorrectAnswer image.
+      if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
+        this.writeTextToCanvas('Health: 90', 36, 1750, 50);
+        this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
+      } else {
+        this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+      }
+
+      //Adds 10 to Score when 'B' has been pressed. Otherwise show default Score. Also draws the correctAnswer image.
+      if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
+        this.writeTextToCanvas('Score: 10', 36, 120, 50);
+        this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
+      } else {
+        this.writeTextToCanvas('Score: 0', 36, 120, 50);
+      }
     }
   }
 }
