@@ -9,6 +9,7 @@ export default class Game {
     howtoplay;
     incorrectAnswer;
     correctAnswer;
+    startScreen;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext('2d');
@@ -21,6 +22,7 @@ export default class Game {
         this.howtoplay = this.createHowToPlay('howToPlay');
         this.incorrectAnswer = this.createIncorrectAnswer('incorrectAnswer');
         this.correctAnswer = this.createCorrectAnswer('correctAnswer');
+        this.startScreen = this.createStartScreen('startScreen');
         this.loop();
     }
     loop = () => {
@@ -46,6 +48,7 @@ export default class Game {
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
         this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
         this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
+        this.ctx.drawImage(this.startScreen.img, this.startScreen.xPos, this.startScreen.yPos);
     }
     createPlayer(name) {
         return {
@@ -96,6 +99,14 @@ export default class Game {
             yPos: 650,
         };
     }
+    createStartScreen(name) {
+        return {
+            name: name,
+            img: Game.loadNewImage('./assets/img/finalstartscreen1920.jpg'),
+            xPos: 0,
+            yPos: 0,
+        };
+    }
     static loadNewImage(source) {
         const img = new Image();
         img.src = source;
@@ -114,19 +125,22 @@ export default class Game {
         if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_E)) {
             this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
         }
-        if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
-            this.writeTextToCanvas('Score: 10', 36, 120, 50);
-            this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
-        }
-        else {
-            this.writeTextToCanvas('Score: 0', 36, 120, 50);
-        }
-        if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
-            this.writeTextToCanvas('Health: 90', 36, 1750, 50);
-            this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
-        }
-        else {
-            this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+        if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_SPACE)) {
+            this.startScreen.xPos = -3000;
+            if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
+                this.writeTextToCanvas('Health: 90', 36, 1750, 50);
+                this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
+            }
+            else {
+                this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+            }
+            if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
+                this.writeTextToCanvas('Score: 10', 36, 120, 50);
+                this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
+            }
+            else {
+                this.writeTextToCanvas('Score: 0', 36, 120, 50);
+            }
         }
     }
 }
