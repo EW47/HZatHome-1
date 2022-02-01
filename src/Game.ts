@@ -117,7 +117,7 @@ export default class Game {
       img: Game.loadNewImage('./assets/img/character.png'),
       xPos: 850,
       yPos: 550,
-      speed: 4,
+      speed: 5,
     };
   }
 

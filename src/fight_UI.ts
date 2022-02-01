@@ -12,7 +12,7 @@ interface CircleOptions {
 }
 
 // Deze werkt alleen op een aspect ratio van 16:9
-// Alles wat boven export zit hoort in app.ts te zitten --------------------------------------------------------------
+// Alles wat boven export zit hoort in app.ts te zitten -----
 
 /**
  * Draw the entire UI and creates the buttons
