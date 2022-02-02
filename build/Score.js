@@ -7,7 +7,7 @@ export default class Score {
         this.canvas = canvasId;
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext("2d");
         this.scoreBoard = [];
         this.createScore(0);
     }
@@ -21,13 +21,13 @@ export default class Score {
         }
     }
     writeTextToCanvas(text, xCoordinate, yCoordinate, fontSize = 20) {
-        const ctx = this.canvas.getContext('2d');
+        const ctx = this.canvas.getContext("2d");
         ctx.font = `${fontSize}px sans-serif`;
         ctx.fillText(text, xCoordinate, yCoordinate);
     }
     createScore(score) {
         return {
-            number: this.score
+            number: this.score,
         };
     }
     getScore() {

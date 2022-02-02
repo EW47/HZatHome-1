@@ -1,5 +1,4 @@
 export default class Score {
-
   private canvas: HTMLCanvasElement;
 
   private ctx: CanvasRenderingContext2D;
@@ -9,20 +8,18 @@ export default class Score {
   private scoreBoard: Score[];
 
   public constructor(canvasId: HTMLCanvasElement) {
-
     // Construct all of the canvas
     this.canvas = canvasId;
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    this.ctx = <CanvasRenderingContext2D>this.canvas.getContext('2d');
+    this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
     this.scoreBoard = [];
     this.createScore(0);
-
   }
 
   /**
- * Draws all the necessary elements to the canvas
- */
+   * Draws all the necessary elements to the canvas
+   */
   private draw(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     // when there are elements in the scoring items array
@@ -36,7 +33,7 @@ export default class Score {
       this.writeTextToCanvas(
         `Score is: ${this.score}`,
         this.canvas.width / 2,
-        40,
+        40
       );
     }
   }
@@ -55,21 +52,21 @@ export default class Score {
     text: string,
     xCoordinate: number,
     yCoordinate: number,
-    fontSize: number = 20,
+    fontSize: number = 20
   ): void {
-    const ctx = this.canvas.getContext('2d');
+    const ctx = this.canvas.getContext("2d");
     ctx.font = `${fontSize}px sans-serif`;
     ctx.fillText(text, xCoordinate, yCoordinate);
   }
 
   /**
- * Method to create the Score
- *
- * @returns score - score object
- */
+   * Method to create the Score
+   *
+   * @returns score - score object
+   */
   public createScore(score: number): any {
     return {
-      number: this.score
+      number: this.score,
     };
   }
 
@@ -80,5 +77,4 @@ export default class Score {
   public setScore(score: any): void {
     this.score = score;
   }
-
 }

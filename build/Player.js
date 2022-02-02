@@ -1,4 +1,4 @@
-import KeyboardListener from './KeyboardListener.js';
+import KeyboardListener from "./KeyboardListener.js";
 export default class Player {
     healthImage;
     health;
@@ -10,8 +10,8 @@ export default class Player {
     keyBoardListener;
     score;
     constructor(name) {
-        this.createPlayer('me');
-        this.changeCharacter('choose the character');
+        this.createPlayer("me");
+        this.changeCharacter("choose the character");
         this.keyBoardListener = new KeyboardListener();
     }
     getHealthImage() {
@@ -73,7 +73,7 @@ export default class Player {
     createPlayer(name) {
         return {
             name: name,
-            image: Player.loadNewImage('./assets/img/player1.png'),
+            image: Player.loadNewImage("./assets/img/player1.png"),
             xPosition: 270,
             yPosition: 450,
             speed: 4,
@@ -83,7 +83,7 @@ export default class Player {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_1)) {
             return {
                 name: name,
-                image: Player.loadNewImage('./assets/img/Charter1.png'),
+                image: Player.loadNewImage("./assets/img/Charter1.png"),
                 xPosition: 270,
                 yPosition: 450,
                 speed: 4,
@@ -92,7 +92,7 @@ export default class Player {
         else if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_2)) {
             return {
                 name: name,
-                image: Player.loadNewImage('./assets/img/Charter2.png'),
+                image: Player.loadNewImage("./assets/img/Charter2.png"),
                 xPosition: 270,
                 yPosition: 450,
                 speed: 4,

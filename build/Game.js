@@ -1,4 +1,4 @@
-import KeyboardListener from './KeyboardListener.js';
+import KeyboardListener from "./KeyboardListener.js";
 export default class Game {
     canvas;
     ctx;
@@ -12,17 +12,16 @@ export default class Game {
     startScreen;
     constructor(canvas) {
         this.canvas = canvas;
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext("2d");
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.keyBoardListener = new KeyboardListener();
-        this.player = this.createPlayer('Me');
-        this.enemy = this.createGmailEnemy('Gmail');
-        this.question = this.createQuestion('GmailQuestion');
-        this.howtoplay = this.createHowToPlay('howToPlay');
-        this.incorrectAnswer = this.createIncorrectAnswer('incorrectAnswer');
-        this.correctAnswer = this.createCorrectAnswer('correctAnswer');
-        this.startScreen = this.createStartScreen('startScreen');
+        this.player = this.createPlayer("Me");
+        this.enemy = this.createGmailEnemy("Gmail");
+        this.howtoplay = this.createHowToPlay("howToPlay");
+        this.incorrectAnswer = this.createIncorrectAnswer("incorrectAnswer");
+        this.correctAnswer = this.createCorrectAnswer("correctAnswer");
+        this.startScreen = this.createStartScreen("startScreen");
         this.loop();
     }
     loop = () => {
@@ -43,8 +42,7 @@ export default class Game {
         requestAnimationFrame(this.loop);
     };
     render() {
-        const ctx = this.canvas.getContext('2d');
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
         this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
         this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
@@ -53,32 +51,24 @@ export default class Game {
     createPlayer(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/character.png'),
+            img: Game.loadNewImage("./assets/img/character.png"),
             xPos: 850,
             yPos: 550,
-            speed: 4,
+            speed: 5,
         };
     }
     createGmailEnemy(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/monster.png'),
+            img: Game.loadNewImage("./assets/img/monster.png"),
             xPos: 650,
             yPos: 0,
-        };
-    }
-    createQuestion(name) {
-        return {
-            name: name,
-            img: Game.loadNewImage('./assets/img/question1.png'),
-            xPos: 600,
-            yPos: 650,
         };
     }
     createHowToPlay(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/howtoplay.png'),
+            img: Game.loadNewImage("./assets/img/howtoplay.png"),
             xPos: 1650,
             yPos: 80,
         };
@@ -86,7 +76,7 @@ export default class Game {
     createIncorrectAnswer(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/incorrectAnswer.png'),
+            img: Game.loadNewImage("./assets/img/incorrectAnswer.png"),
             xPos: 600,
             yPos: 650,
         };
@@ -94,7 +84,7 @@ export default class Game {
     createCorrectAnswer(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/correctAnswer.png'),
+            img: Game.loadNewImage("./assets/img/correctAnswer.png"),
             xPos: 600,
             yPos: 650,
         };
@@ -102,7 +92,7 @@ export default class Game {
     createStartScreen(name) {
         return {
             name: name,
-            img: Game.loadNewImage('./assets/img/finalstartscreen1920.jpg'),
+            img: Game.loadNewImage("./assets/img/finalstartscreen1920.jpg"),
             xPos: 0,
             yPos: 0,
         };
@@ -115,7 +105,7 @@ export default class Game {
     static randomNumber(min, max) {
         return Math.round(Math.random() * (max - min) + min);
     }
-    writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = 'center', color = 'black') {
+    writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = "center", color = "black") {
         this.ctx.font = `${fontSize}px sans-serif`;
         this.ctx.fillStyle = color;
         this.ctx.textAlign = alignment;
@@ -123,23 +113,23 @@ export default class Game {
     }
     processInput() {
         if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_E)) {
-            this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
+            this.question.drawFightUI();
         }
         if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_SPACE)) {
             this.startScreen.xPos = -3000;
             if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
-                this.writeTextToCanvas('Health: 90', 36, 1750, 50);
+                this.writeTextToCanvas("Health: 90", 36, 1750, 50);
                 this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
             }
             else {
-                this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+                this.writeTextToCanvas("Health: 100", 36, 1750, 50);
             }
             if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
-                this.writeTextToCanvas('Score: 10', 36, 120, 50);
+                this.writeTextToCanvas("Score: 10", 36, 120, 50);
                 this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
             }
             else {
-                this.writeTextToCanvas('Score: 0', 36, 120, 50);
+                this.writeTextToCanvas("Score: 0", 36, 120, 50);
             }
         }
     }

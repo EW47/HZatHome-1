@@ -1,7 +1,6 @@
 import KeyboardListener from "./KeyboardListener";
 
 export default class Monster {
-
   private type: string;
 
   private health: number;
@@ -13,8 +12,7 @@ export default class Monster {
   private keyBoardListener: KeyboardListener;
 
   public constructor(type: string, health: number, attack: number) {
-
-    this.createGmailEnemy('Gmail');
+    this.createGmailEnemy("Gmail");
   }
 
   public getType(): string {
@@ -50,38 +48,38 @@ export default class Monster {
   }
 
   /**
-     * Method to create a enemy object
-     *
-     * @param name - name of the enemy
-     * @returns enemy- enemy object
-     */
+   * Method to create a enemy object
+   *
+   * @param name - name of the enemy
+   * @returns enemy- enemy object
+   */
   public createGmailEnemy(name: string): any {
     return {
       name: name,
-      img: Monster.loadNewImage('./assets/img/GmailMonster.png'),
+      img: Monster.loadNewImage("./assets/img/GmailMonster.png"),
       xPos: 650,
       yPos: 0,
     };
   }
 
   /**
-  * Method to change the Monster you're fighting against
-  *
-  * @param name - name of the Monster
-  * @returns monster - monster object
-  */
+   * Method to change the Monster you're fighting against
+   *
+   * @param name - name of the Monster
+   * @returns monster - monster object
+   */
   public changeMonster(name: string): any {
     if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_F)) {
       return {
         name: name,
-        image: Monster.loadNewImage('./assets/img/FacebookMonster.png'),
+        image: Monster.loadNewImage("./assets/img/FacebookMonster.png"),
         xPos: 650,
         yPos: 0,
       };
     } else if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_C)) {
       return {
         name: name,
-        image: Monster.loadNewImage('./assets/img/ChromeMonster.png'),
+        image: Monster.loadNewImage("./assets/img/ChromeMonster.png"),
         xPos: 650,
         yPos: 0,
       };

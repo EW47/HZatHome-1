@@ -9,7 +9,7 @@
  *
  * @author BugSlayer
  */
- export default class KeyboardListener {
+export default class KeyboardListener {
   // Some convenient key codes already defined here. If you need a specific
   // keycode, see:https://keycode.info/
   public static readonly KEY_SPACE = 32;
@@ -27,7 +27,7 @@
   public static readonly KEY_E = 69;
 
   public static readonly KEY_A = 65;
-  
+
   public static readonly KEY_B = 66;
 
   public static readonly KEY_F = 70;
@@ -48,8 +48,8 @@
     this.keyCodeStates = new Array<boolean>();
     // Register the arrow methods as listeners to keyevents
     // There is a third event ('keypress'), but we do not need to use it
-    window.addEventListener('keydown', this.keyDown);
-    window.addEventListener('keyup', this.keyUp);
+    window.addEventListener("keydown", this.keyDown);
+    window.addEventListener("keyup", this.keyUp);
   }
 
   /**
@@ -63,16 +63,16 @@
     return this.keyCodeStates[keyCode] === true;
   }
 
-    /**
+  /**
    * Returns `true` if and only if the last known state of the keyboard
    * reflects that the specified key is currently pressed.
    *
    * @param {number} keyCode the keyCode to check
    * @returns {boolean} `true` when the specified key is currently down
    */
-     public isKeyUp(keyCode: number): boolean {
-      return this.keyCodeStates[keyCode] === false;
-    }
+  public isKeyUp(keyCode: number): boolean {
+    return this.keyCodeStates[keyCode] === false;
+  }
 
   /*
    * Arrow method that catches keydown events

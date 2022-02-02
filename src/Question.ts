@@ -14,15 +14,15 @@ interface CircleOptions {
 import KeyboardListener from "./KeyboardListener";
 
 export default class Question {
-  private readonly canvas = <HTMLCanvasElement>(
-    document.getElementById("canvas")
-  );
-  private readonly ctx = this.canvas.getContext("2d");
-  private readonly dflt: number = this.canvas.height;
+  private canvas = <HTMLCanvasElement>document.getElementById("canvas");
+  private ctx = this.canvas.getContext("2d");
+  private dflt: number = this.canvas.height;
 
   private question: any;
 
   private keyBoardListener: KeyboardListener;
+  static ctx: any;
+  static dflt: number;
 
   public constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -106,7 +106,7 @@ export default class Question {
    * @param width - Width of rectangle
    * @param length - Length of rectangle
    */
-  public drawUIRect(options: RectangleOptions) {
+  public static drawUIRect(options: RectangleOptions) {
     const { XPos: XinR } = options;
     const { YPos: YinR } = options;
     const { width: widthR } = options;
@@ -133,7 +133,7 @@ export default class Question {
    * @param YPos - Vertical coordinate in pixels
    * @param CusID - Id of circle
    */
-  public drawUICircle(options: CircleOptions) {
+  public static drawUICircle(options: CircleOptions) {
     const { XPos: XinC } = options;
     const { YPos: YinC } = options;
     const { CusID: id } = options;
@@ -161,12 +161,82 @@ export default class Question {
     );
   }
 
+  public static drawFightUI() {
+    // Background
+    this.drawUIRect({
+      XPos: 0,
+      YPos: 0,
+      width: 1920,
+      length: 1080,
+    });
+
+    // Question Box
+    this.drawUIRect({
+      XPos: 30,
+      YPos: 30,
+      width: 400,
+      length: 175,
+    });
+
+    // Anwser Box
+    this.drawUIRect({
+      XPos: 30,
+      YPos: 225,
+      width: 400,
+      length: 825,
+    });
+
+    // Player Rectangle
+    this.drawUIRect({
+      XPos: 600,
+      YPos: 125,
+      width: 375,
+      length: 200,
+    });
+
+    // Enemy Rectangle
+    this.drawUIRect({
+      XPos: 1400,
+      YPos: 775,
+      width: 375,
+      length: 200,
+    });
+
+    // Anwser A Bubble
+    this.drawUICircle({
+      XPos: 100,
+      YPos: 300,
+      CusID: "A",
+    });
+
+    // Anwser B Bubble
+    this.drawUICircle({
+      XPos: 100,
+      YPos: 480,
+      CusID: "B",
+    });
+
+    // Anwser C Bubble
+    this.drawUICircle({
+      XPos: 100,
+      YPos: 660,
+      CusID: "C",
+    });
+
+    // Anwser D Bubble
+    this.drawUICircle({
+      XPos: 100,
+      YPos: 840,
+      CusID: "D",
+    });
+  }
+
   public processInput(): void {
     if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_E)) {
-      this.question.xPos = 300; //600
+      this.question.xPos = 600;
 
       // Background
-      drawUIRect({
+      Question.drawUIRect({
         XPos: 0,
         YPos: 0,
         width: 1920,
@@ -174,7 +244,7 @@ export default class Question {
       });
 
       // Question Box
-      drawUIRect({
+      Question.drawUIRect({
         XPos: 30,
         YPos: 30,
         width: 400,
@@ -182,7 +252,7 @@ export default class Question {
       });
 
       // Anwser Box
-      drawUIRect({
+      Question.drawUIRect({
         XPos: 30,
         YPos: 225,
         width: 400,
@@ -190,7 +260,7 @@ export default class Question {
       });
 
       // Player Rectangle
-      drawUIRect({
+      Question.drawUIRect({
         XPos: 600,
         YPos: 125,
         width: 375,
@@ -198,7 +268,7 @@ export default class Question {
       });
 
       // Enemy Rectangle
-      drawUIRect({
+      Question.drawUIRect({
         XPos: 1400,
         YPos: 775,
         width: 375,
@@ -206,28 +276,28 @@ export default class Question {
       });
 
       // Anwser A Bubble
-      drawUICircle({
+      Question.drawUICircle({
         XPos: 100,
         YPos: 300,
         CusID: "A",
       });
 
       // Anwser B Bubble
-      drawUICircle({
+      Question.drawUICircle({
         XPos: 100,
         YPos: 480,
         CusID: "B",
       });
 
       // Anwser C Bubble
-      drawUICircle({
+      Question.drawUICircle({
         XPos: 100,
         YPos: 660,
         CusID: "C",
       });
 
       // Anwser D Bubble
-      drawUICircle({
+      Question.drawUICircle({
         XPos: 100,
         YPos: 840,
         CusID: "D",

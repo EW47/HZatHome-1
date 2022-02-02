@@ -1,10 +1,12 @@
 import KeyboardListener from "./KeyboardListener";
 export default class Question {
-    canvas = (document.getElementById("canvas"));
+    canvas = document.getElementById("canvas");
     ctx = this.canvas.getContext("2d");
     dflt = this.canvas.height;
     question;
     keyBoardListener;
+    static ctx;
+    static dflt;
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d");
@@ -41,7 +43,7 @@ export default class Question {
         this.ctx.textAlign = alignment;
         this.ctx.fillText(text, xCoordinate, yCoordinate);
     }
-    drawUIRect(options) {
+    static drawUIRect(options) {
         const { XPos: XinR } = options;
         const { YPos: YinR } = options;
         const { width: widthR } = options;
@@ -54,7 +56,7 @@ export default class Question {
         this.ctx.fill();
         this.ctx.stroke();
     }
-    drawUICircle(options) {
+    static drawUICircle(options) {
         const { XPos: XinC } = options;
         const { YPos: YinC } = options;
         const { CusID: id } = options;
@@ -69,55 +71,107 @@ export default class Question {
         this.ctx.font = `${this.dflt / 18}px Arial`;
         this.ctx.fillText(id, this.dflt / (1080 / XinC) - this.dflt / 54, this.dflt / (1080 / YinC) + this.dflt / 54);
     }
+    static drawFightUI() {
+        this.drawUIRect({
+            XPos: 0,
+            YPos: 0,
+            width: 1920,
+            length: 1080,
+        });
+        this.drawUIRect({
+            XPos: 30,
+            YPos: 30,
+            width: 400,
+            length: 175,
+        });
+        this.drawUIRect({
+            XPos: 30,
+            YPos: 225,
+            width: 400,
+            length: 825,
+        });
+        this.drawUIRect({
+            XPos: 600,
+            YPos: 125,
+            width: 375,
+            length: 200,
+        });
+        this.drawUIRect({
+            XPos: 1400,
+            YPos: 775,
+            width: 375,
+            length: 200,
+        });
+        this.drawUICircle({
+            XPos: 100,
+            YPos: 300,
+            CusID: "A",
+        });
+        this.drawUICircle({
+            XPos: 100,
+            YPos: 480,
+            CusID: "B",
+        });
+        this.drawUICircle({
+            XPos: 100,
+            YPos: 660,
+            CusID: "C",
+        });
+        this.drawUICircle({
+            XPos: 100,
+            YPos: 840,
+            CusID: "D",
+        });
+    }
     processInput() {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_E)) {
-            this.question.xPos = 300;
-            drawUIRect({
+            this.question.xPos = 600;
+            Question.drawUIRect({
                 XPos: 0,
                 YPos: 0,
                 width: 1920,
                 length: 1080,
             });
-            drawUIRect({
+            Question.drawUIRect({
                 XPos: 30,
                 YPos: 30,
                 width: 400,
                 length: 175,
             });
-            drawUIRect({
+            Question.drawUIRect({
                 XPos: 30,
                 YPos: 225,
                 width: 400,
                 length: 825,
             });
-            drawUIRect({
+            Question.drawUIRect({
                 XPos: 600,
                 YPos: 125,
                 width: 375,
                 length: 200,
             });
-            drawUIRect({
+            Question.drawUIRect({
                 XPos: 1400,
                 YPos: 775,
                 width: 375,
                 length: 200,
             });
-            drawUICircle({
+            Question.drawUICircle({
                 XPos: 100,
                 YPos: 300,
                 CusID: "A",
             });
-            drawUICircle({
+            Question.drawUICircle({
                 XPos: 100,
                 YPos: 480,
                 CusID: "B",
             });
-            drawUICircle({
+            Question.drawUICircle({
                 XPos: 100,
                 YPos: 660,
                 CusID: "C",
             });
-            drawUICircle({
+            Question.drawUICircle({
                 XPos: 100,
                 YPos: 840,
                 CusID: "D",

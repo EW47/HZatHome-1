@@ -1,4 +1,5 @@
-import KeyboardListener from './KeyboardListener.js';
+import KeyboardListener from "./KeyboardListener.js";
+import Question from "./Question.js";
 
 export default class Game {
   // Necessary canvas attributes
@@ -37,32 +38,29 @@ export default class Game {
    * should be rendered upon
    */
   public constructor(canvas: HTMLCanvasElement) {
-
     this.canvas = canvas;
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext("2d");
 
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
 
     this.keyBoardListener = new KeyboardListener();
 
-    this.player = this.createPlayer('Me');
-    this.enemy = this.createGmailEnemy('Gmail');
-    this.question = this.createQuestion('GmailQuestion');
-    this.howtoplay = this.createHowToPlay('howToPlay');
-    this.incorrectAnswer = this.createIncorrectAnswer('incorrectAnswer');
-    this.correctAnswer = this.createCorrectAnswer('correctAnswer');
-    this.startScreen = this.createStartScreen('startScreen');
+    this.player = this.createPlayer("Me");
+    this.enemy = this.createGmailEnemy("Gmail");
+    this.howtoplay = this.createHowToPlay("howToPlay");
+    this.incorrectAnswer = this.createIncorrectAnswer("incorrectAnswer");
+    this.correctAnswer = this.createCorrectAnswer("correctAnswer");
+    this.startScreen = this.createStartScreen("startScreen");
 
     // Start the game cycle
     this.loop();
   }
 
   /**
-     * Method for the Game Loop
-     */
+   * Method for the Game Loop
+   */
   public loop = (): void => {
-
     this.render();
 
     if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_LEFT)) {
@@ -87,10 +85,8 @@ export default class Game {
    * Draw the game so the player can see what happened
    */
   public render(): void {
-    // Get the canvas rendering context
-    const ctx = this.canvas.getContext('2d');
     // Clear the entire canvas
-    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     //Draw Player
     this.ctx.drawImage(this.player.img, this.player.xPos, this.player.yPos);
@@ -99,10 +95,18 @@ export default class Game {
     this.ctx.drawImage(this.enemy.img, this.enemy.xPos, this.enemy.yPos);
 
     //Draw HowToPlay
-    this.ctx.drawImage(this.howtoplay.img, this.howtoplay.xPos, this.howtoplay.yPos);
+    this.ctx.drawImage(
+      this.howtoplay.img,
+      this.howtoplay.xPos,
+      this.howtoplay.yPos
+    );
 
     //Draw StartScreen
-    this.ctx.drawImage(this.startScreen.img, this.startScreen.xPos, this.startScreen.yPos);
+    this.ctx.drawImage(
+      this.startScreen.img,
+      this.startScreen.xPos,
+      this.startScreen.yPos
+    );
   }
 
   /**
@@ -114,7 +118,7 @@ export default class Game {
   public createPlayer(name: string): any {
     return {
       name: name,
-      img: Game.loadNewImage('./assets/img/character.png'),
+      img: Game.loadNewImage("./assets/img/character.png"),
       xPos: 850,
       yPos: 550,
       speed: 5,
@@ -122,100 +126,86 @@ export default class Game {
   }
 
   /**
-     * Method to create a enemy object
-     *
-     * @param name - name of the enemy
-     * @returns enemy- enemy object
-     */
+   * Method to create a enemy object
+   *
+   * @param name - name of the enemy
+   * @returns enemy- enemy object
+   */
   public createGmailEnemy(name: string): any {
     return {
       name: name,
-      img: Game.loadNewImage('./assets/img/monster.png'),
+      img: Game.loadNewImage("./assets/img/monster.png"),
       xPos: 650,
       yPos: 0,
     };
   }
+
   /**
-     * Method to create a question object
-     *
-     * @param name - name of the enemy
-     * @returns question- question object
-     */
-  public createQuestion(name: string): any {
+   * Method to create a HowToPlay object
+   *
+   * @param name - name of the howtoplay
+   * @returns howtoplay- howtoplay object
+   */
+  public createHowToPlay(name: string): any {
     return {
       name: name,
-      img: Game.loadNewImage('./assets/img/question1.png'),
+      img: Game.loadNewImage("./assets/img/howtoplay.png"),
+      xPos: 1650,
+      yPos: 80,
+    };
+  }
+
+  /**
+   * Method to create a GoodAnswer object
+   *
+   * @param name - name of the GoodAnswer
+   * @returns howtoplay- GoodAnswer object
+   */
+  public createIncorrectAnswer(name: string): any {
+    return {
+      name: name,
+      img: Game.loadNewImage("./assets/img/incorrectAnswer.png"),
       xPos: 600,
       yPos: 650,
     };
   }
 
   /**
-     * Method to create a HowToPlay object
-     *
-     * @param name - name of the howtoplay
-     * @returns howtoplay- howtoplay object
-     */
-  public createHowToPlay(name: string): any {
-    return {
-      name: name,
-      img: Game.loadNewImage('./assets/img/howtoplay.png'),
-      xPos: 1650,
-      yPos: 80,
-    }
-  }
-
-  /**
-    * Method to create a GoodAnswer object
-    *
-    * @param name - name of the GoodAnswer
-    * @returns howtoplay- GoodAnswer object
-    */
-  public createIncorrectAnswer(name: string): any {
-    return {
-      name: name,
-      img: Game.loadNewImage('./assets/img/incorrectAnswer.png'),
-      xPos: 600,
-      yPos: 650,
-    }
-  }
-
-  /**
-    * Method to create a GoodAnswer object
-    *
-    * @param name - name of the GoodAnswer
-    * @returns howtoplay- GoodAnswer object
-    */
+   * Method to create a GoodAnswer object
+   *
+   * @param name - name of the GoodAnswer
+   * @returns howtoplay- GoodAnswer object
+   */
   public createCorrectAnswer(name: string): any {
     return {
       name: name,
-      img: Game.loadNewImage('./assets/img/correctAnswer.png'),
+      img: Game.loadNewImage("./assets/img/correctAnswer.png"),
       xPos: 600,
       yPos: 650,
-    }
+    };
   }
 
   /**
-  * Method to create a startScreen object
-  *
-  * @param name - name of the startScreen
-  * @returns howtoplay- startScreen object
-  */
+   * Method to create a startScreen object
+   *
+   * @param name - name of the startScreen
+   * @returns howtoplay- startScreen object
+   */
   public createStartScreen(name: string): any {
     return {
       name: name,
-      img: Game.loadNewImage('./assets/img/finalstartscreen1920.jpg'),
+      img: Game.loadNewImage("./assets/img/finalstartscreen1920.jpg"),
       xPos: 0,
       yPos: 0,
-    }
+    };
   }
 
   /**
-    * Method to load an image
-    *
-    * @param source the source
-    * @returns HTMLImageElement - returns an image
-    */
+   * Method to load an image
+   *
+   * @param source the source
+   * @returns HTMLImageElement - returns an image
+   */
   public static loadNewImage(source: string): HTMLImageElement {
     const img = new Image();
     img.src = source;
@@ -248,8 +238,8 @@ export default class Game {
     fontSize: number = 20,
     xCoordinate: number,
     yCoordinate: number,
-    alignment: CanvasTextAlign = 'center',
-    color: string = 'black',
+    alignment: CanvasTextAlign = "center",
+    color: string = "black"
   ): void {
     this.ctx.font = `${fontSize}px sans-serif`;
     this.ctx.fillStyle = color;
@@ -261,9 +251,9 @@ export default class Game {
    * Process inputs for different actions
    */
   public processInput(): void {
-    //Draws Question when 'E' has been pressed.
+    //Draws the fight ui when 'E' has been pressed and moves the background and characters to the right place.
     if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_E)) {
-      this.ctx.drawImage(this.question.img, this.question.xPos, this.question.yPos);
+      this.question.drawFightUI();
     }
 
     //Shows main game screen when 'Space' has been pressed.
@@ -273,20 +263,27 @@ export default class Game {
 
       //Deducts Health when 'A' has been pressed. Otherwise show default Health. Also draws the incorrectAnswer image.
       if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
-        this.writeTextToCanvas('Health: 90', 36, 1750, 50);
-        this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
+        this.writeTextToCanvas("Health: 90", 36, 1750, 50);
+        this.ctx.drawImage(
+          this.incorrectAnswer.img,
+          this.incorrectAnswer.xPos,
+          this.incorrectAnswer.yPos
+        );
       } else {
-        this.writeTextToCanvas('Health: 100', 36, 1750, 50);
+        this.writeTextToCanvas("Health: 100", 36, 1750, 50);
       }
 
       //Adds 10 to Score when 'B' has been pressed. Otherwise show default Score. Also draws the correctAnswer image.
       if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_B)) {
-        this.writeTextToCanvas('Score: 10', 36, 120, 50);
-        this.ctx.drawImage(this.correctAnswer.img, this.correctAnswer.xPos, this.correctAnswer.yPos);
+        this.writeTextToCanvas("Score: 10", 36, 120, 50);
+        this.ctx.drawImage(
+          this.correctAnswer.img,
+          this.correctAnswer.xPos,
+          this.correctAnswer.yPos
+        );
       } else {
-        this.writeTextToCanvas('Score: 0', 36, 120, 50);
+        this.writeTextToCanvas("Score: 0", 36, 120, 50);
       }
     }
   }
-  
 }

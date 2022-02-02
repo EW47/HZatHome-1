@@ -1,7 +1,9 @@
-import Game from './Game.js';
+import Game from "./Game.js";
 
-console.log('Javascript is working!');
+console.log("Javascript is working!");
 
 // Add EventListener to load the game whenever the browser is ready
-window.addEventListener('load',
-  () => new Game(<HTMLCanvasElement>document.getElementById('canvas')));
+window.addEventListener(
+  "load",
+  () => new Game(<HTMLCanvasElement>document.getElementById("canvas"))
+);

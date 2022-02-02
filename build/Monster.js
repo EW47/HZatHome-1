@@ -6,7 +6,7 @@ export default class Monster {
     image;
     keyBoardListener;
     constructor(type, health, attack) {
-        this.createGmailEnemy('Gmail');
+        this.createGmailEnemy("Gmail");
     }
     getType() {
         return this.type;
@@ -35,7 +35,7 @@ export default class Monster {
     createGmailEnemy(name) {
         return {
             name: name,
-            img: Monster.loadNewImage('./assets/img/GmailMonster.png'),
+            img: Monster.loadNewImage("./assets/img/GmailMonster.png"),
             xPos: 650,
             yPos: 0,
         };
@@ -44,7 +44,7 @@ export default class Monster {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_F)) {
             return {
                 name: name,
-                image: Monster.loadNewImage('./assets/img/FacebookMonster.png'),
+                image: Monster.loadNewImage("./assets/img/FacebookMonster.png"),
                 xPos: 650,
                 yPos: 0,
             };
@@ -52,7 +52,7 @@ export default class Monster {
         else if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_C)) {
             return {
                 name: name,
-                image: Monster.loadNewImage('./assets/img/ChromeMonster.png'),
+                image: Monster.loadNewImage("./assets/img/ChromeMonster.png"),
                 xPos: 650,
                 yPos: 0,
             };

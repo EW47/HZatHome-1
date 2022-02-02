@@ -15,8 +15,8 @@ export default class KeyboardListener {
     keyCodeStates;
     constructor() {
         this.keyCodeStates = new Array();
-        window.addEventListener('keydown', this.keyDown);
-        window.addEventListener('keyup', this.keyUp);
+        window.addEventListener("keydown", this.keyDown);
+        window.addEventListener("keyup", this.keyUp);
     }
     isKeyDown(keyCode) {
         return this.keyCodeStates[keyCode] === true;
