@@ -1,16 +1,3 @@
-interface RectangleOptions {
-  XPos: number;
-  YPos: number;
-  length: number;
-  width: number;
-}
-
-interface CircleOptions {
-  XPos: number;
-  YPos: number;
-  CusID: string;
-}
-
 import KeyboardListener from "./KeyboardListener.js";
 
 export default class Question {
@@ -84,7 +71,7 @@ export default class Question {
     return img;
   }
 
-  public writeTextToCanvas(
+  public static writeTextToCanvas(
     text: string,
     fontSize: number = 20,
     xCoordinate: number,
@@ -106,21 +93,21 @@ export default class Question {
    * @param width - Width of rectangle
    * @param length - Length of rectangle
    */
-  public static drawUIRect(options: RectangleOptions) {
-    const { XPos: XinR } = options;
-    const { YPos: YinR } = options;
-    const { width: widthR } = options;
-    const { length: lengthR } = options;
-
+  public static drawUIRect(
+    XPos: number,
+    YPos: number,
+    width: number,
+    length: number
+  ) {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
     this.ctx.beginPath();
     this.ctx.rect(
-      this.dflt / (1080 / XinR),
-      this.dflt / (1080 / YinR),
-      this.dflt / (1080 / widthR),
-      this.dflt / (1080 / lengthR)
+      this.dflt / (1080 / XPos),
+      this.dflt / (1080 / YPos),
+      this.dflt / (1080 / width),
+      this.dflt / (1080 / length)
     );
     this.ctx.fill();
     this.ctx.stroke();
@@ -133,18 +120,14 @@ export default class Question {
    * @param YPos - Vertical coordinate in pixels
    * @param CusID - Id of circle
    */
-  public static drawUICircle(options: CircleOptions) {
-    const { XPos: XinC } = options;
-    const { YPos: YinC } = options;
-    const { CusID: id } = options;
-
+  public static drawUICircle(XPos: number, YPos: number, CusID: string) {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
     this.ctx.beginPath();
     this.ctx.arc(
-      this.dflt / (1080 / XinC),
-      this.dflt / (1080 / YinC),
+      this.dflt / (1080 / XPos),
+      this.dflt / (1080 / YPos),
       this.dflt / (1080 / 35),
       0,
       2 * Math.PI,
@@ -155,183 +138,68 @@ export default class Question {
     this.ctx.fillStyle = "black";
     this.ctx.font = `${this.dflt / 18}px Arial`;
     this.ctx.fillText(
-      id,
-      this.dflt / (1080 / XinC) - this.dflt / 54,
-      this.dflt / (1080 / YinC) + this.dflt / 54
+      CusID,
+      this.dflt / (1080 / XPos) - this.dflt / 54,
+      this.dflt / (1080 / YPos) + this.dflt / 54
     );
   }
 
   public static drawFightUI() {
     // Background
-    this.drawUIRect({
-      XPos: 0,
-      YPos: 0,
-      width: 1920,
-      length: 1080,
-    });
+    this.drawUIRect(0, 0, 1920, 1080);
 
     // Question Box
-    this.drawUIRect({
-      XPos: 30,
-      YPos: 30,
-      width: 400,
-      length: 175,
-    });
+    this.drawUIRect(30, 30, 400, 175);
 
     // Anwser Box
-    this.drawUIRect({
-      XPos: 30,
-      YPos: 225,
-      width: 400,
-      length: 825,
-    });
+    this.drawUIRect(30, 225, 400, 825);
 
     // Player Rectangle
-    this.drawUIRect({
-      XPos: 600,
-      YPos: 125,
-      width: 375,
-      length: 200,
-    });
+    this.drawUIRect(600, 125, 375, 200);
 
     // Enemy Rectangle
-    this.drawUIRect({
-      XPos: 1400,
-      YPos: 775,
-      width: 375,
-      length: 200,
-    });
+    this.drawUIRect(1400, 775, 375, 200);
 
     // Anwser A Bubble
-    this.drawUICircle({
-      XPos: 100,
-      YPos: 300,
-      CusID: "A",
-    });
+    this.drawUICircle(100, 300, "A");
 
     // Anwser B Bubble
-    this.drawUICircle({
-      XPos: 100,
-      YPos: 480,
-      CusID: "B",
-    });
+    this.drawUICircle(100, 480, "B");
 
     // Anwser C Bubble
-    this.drawUICircle({
-      XPos: 100,
-      YPos: 660,
-      CusID: "C",
-    });
+    this.drawUICircle(100, 660, "C");
 
     // Anwser D Bubble
-    this.drawUICircle({
-      XPos: 100,
-      YPos: 840,
-      CusID: "D",
-    });
-  }
+    this.drawUICircle(100, 840, "D");
 
-  public processInput(): void {
-    if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_E)) {
-      this.question.xPos = 600;
+    //Questione
+    this.writeTextToCanvas(
+      "Je doet online een quiz die de toekomst voorspelt. Echter vraagt de quiz om de naam",
+      18,
+      960,
+      670
+    );
+    this.writeTextToCanvas(
+      "van je vader in te vullen en je geboortedatum. Wat doe je? ",
+      18,
+      860,
+      690
+    );
 
-      // Background
-      Question.drawUIRect({
-        XPos: 0,
-        YPos: 0,
-        width: 1920,
-        length: 1080,
-      });
+    //Answer A
+    this.writeTextToCanvas(
+      "Ik vul de gegevens in en zie wat de toekomst brengt.",
+      16,
+      855,
+      730
+    );
 
-      // Question Box
-      Question.drawUIRect({
-        XPos: 30,
-        YPos: 30,
-        width: 400,
-        length: 175,
-      });
-
-      // Anwser Box
-      Question.drawUIRect({
-        XPos: 30,
-        YPos: 225,
-        width: 400,
-        length: 825,
-      });
-
-      // Player Rectangle
-      Question.drawUIRect({
-        XPos: 600,
-        YPos: 125,
-        width: 375,
-        length: 200,
-      });
-
-      // Enemy Rectangle
-      Question.drawUIRect({
-        XPos: 1400,
-        YPos: 775,
-        width: 375,
-        length: 200,
-      });
-
-      // Anwser A Bubble
-      Question.drawUICircle({
-        XPos: 100,
-        YPos: 300,
-        CusID: "A",
-      });
-
-      // Anwser B Bubble
-      Question.drawUICircle({
-        XPos: 100,
-        YPos: 480,
-        CusID: "B",
-      });
-
-      // Anwser C Bubble
-      Question.drawUICircle({
-        XPos: 100,
-        YPos: 660,
-        CusID: "C",
-      });
-
-      // Anwser D Bubble
-      Question.drawUICircle({
-        XPos: 100,
-        YPos: 840,
-        CusID: "D",
-      });
-
-      //Questione
-      this.writeTextToCanvas(
-        "Je doet online een quiz die de toekomst voorspelt. Echter vraagt de quiz om de naam",
-        18,
-        960,
-        670
-      );
-      this.writeTextToCanvas(
-        "van je vader in te vullen en je geboortedatum. Wat doe je? ",
-        18,
-        860,
-        690
-      );
-
-      //Answer A
-      this.writeTextToCanvas(
-        "Ik vul de gegevens in en zie wat de toekomst brengt.",
-        16,
-        855,
-        730
-      );
-
-      //Answer B
-      this.writeTextToCanvas(
-        "Ik sluit de quiz en doe hier niet aan mee",
-        16,
-        810,
-        805
-      );
-    }
+    //Answer B
+    this.writeTextToCanvas(
+      "Ik sluit de quiz en doe hier niet aan mee",
+      16,
+      810,
+      805
+    );
   }
 }

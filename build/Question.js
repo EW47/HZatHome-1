@@ -1,4 +1,3 @@
-import KeyboardListener from "./KeyboardListener.js";
 export default class Question {
     canvas = document.getElementById("canvas");
     ctx = this.canvas.getContext("2d");
@@ -37,150 +36,47 @@ export default class Question {
         img.src = source;
         return img;
     }
-    writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = "center", color = "black") {
+    static writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = "center", color = "black") {
         this.ctx.font = `${fontSize}px sans-serif`;
         this.ctx.fillStyle = color;
         this.ctx.textAlign = alignment;
         this.ctx.fillText(text, xCoordinate, yCoordinate);
     }
-    static drawUIRect(options) {
-        const { XPos: XinR } = options;
-        const { YPos: YinR } = options;
-        const { width: widthR } = options;
-        const { length: lengthR } = options;
+    static drawUIRect(XPos, YPos, width, length) {
         this.ctx.lineWidth = this.dflt / 135;
         this.ctx.fillStyle = "white";
         this.ctx.strokeStyle = "black";
         this.ctx.beginPath();
-        this.ctx.rect(this.dflt / (1080 / XinR), this.dflt / (1080 / YinR), this.dflt / (1080 / widthR), this.dflt / (1080 / lengthR));
+        this.ctx.rect(this.dflt / (1080 / XPos), this.dflt / (1080 / YPos), this.dflt / (1080 / width), this.dflt / (1080 / length));
         this.ctx.fill();
         this.ctx.stroke();
     }
-    static drawUICircle(options) {
-        const { XPos: XinC } = options;
-        const { YPos: YinC } = options;
-        const { CusID: id } = options;
+    static drawUICircle(XPos, YPos, CusID) {
         this.ctx.lineWidth = this.dflt / 135;
         this.ctx.fillStyle = "white";
         this.ctx.strokeStyle = "black";
         this.ctx.beginPath();
-        this.ctx.arc(this.dflt / (1080 / XinC), this.dflt / (1080 / YinC), this.dflt / (1080 / 35), 0, 2 * Math.PI, false);
+        this.ctx.arc(this.dflt / (1080 / XPos), this.dflt / (1080 / YPos), this.dflt / (1080 / 35), 0, 2 * Math.PI, false);
         this.ctx.stroke();
         this.ctx.fill();
         this.ctx.fillStyle = "black";
         this.ctx.font = `${this.dflt / 18}px Arial`;
-        this.ctx.fillText(id, this.dflt / (1080 / XinC) - this.dflt / 54, this.dflt / (1080 / YinC) + this.dflt / 54);
+        this.ctx.fillText(CusID, this.dflt / (1080 / XPos) - this.dflt / 54, this.dflt / (1080 / YPos) + this.dflt / 54);
     }
     static drawFightUI() {
-        this.drawUIRect({
-            XPos: 0,
-            YPos: 0,
-            width: 1920,
-            length: 1080,
-        });
-        this.drawUIRect({
-            XPos: 30,
-            YPos: 30,
-            width: 400,
-            length: 175,
-        });
-        this.drawUIRect({
-            XPos: 30,
-            YPos: 225,
-            width: 400,
-            length: 825,
-        });
-        this.drawUIRect({
-            XPos: 600,
-            YPos: 125,
-            width: 375,
-            length: 200,
-        });
-        this.drawUIRect({
-            XPos: 1400,
-            YPos: 775,
-            width: 375,
-            length: 200,
-        });
-        this.drawUICircle({
-            XPos: 100,
-            YPos: 300,
-            CusID: "A",
-        });
-        this.drawUICircle({
-            XPos: 100,
-            YPos: 480,
-            CusID: "B",
-        });
-        this.drawUICircle({
-            XPos: 100,
-            YPos: 660,
-            CusID: "C",
-        });
-        this.drawUICircle({
-            XPos: 100,
-            YPos: 840,
-            CusID: "D",
-        });
-    }
-    processInput() {
-        if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_E)) {
-            this.question.xPos = 600;
-            Question.drawUIRect({
-                XPos: 0,
-                YPos: 0,
-                width: 1920,
-                length: 1080,
-            });
-            Question.drawUIRect({
-                XPos: 30,
-                YPos: 30,
-                width: 400,
-                length: 175,
-            });
-            Question.drawUIRect({
-                XPos: 30,
-                YPos: 225,
-                width: 400,
-                length: 825,
-            });
-            Question.drawUIRect({
-                XPos: 600,
-                YPos: 125,
-                width: 375,
-                length: 200,
-            });
-            Question.drawUIRect({
-                XPos: 1400,
-                YPos: 775,
-                width: 375,
-                length: 200,
-            });
-            Question.drawUICircle({
-                XPos: 100,
-                YPos: 300,
-                CusID: "A",
-            });
-            Question.drawUICircle({
-                XPos: 100,
-                YPos: 480,
-                CusID: "B",
-            });
-            Question.drawUICircle({
-                XPos: 100,
-                YPos: 660,
-                CusID: "C",
-            });
-            Question.drawUICircle({
-                XPos: 100,
-                YPos: 840,
-                CusID: "D",
-            });
-            this.writeTextToCanvas("Je doet online een quiz die de toekomst voorspelt. Echter vraagt de quiz om de naam", 18, 960, 670);
-            this.writeTextToCanvas("van je vader in te vullen en je geboortedatum. Wat doe je? ", 18, 860, 690);
-            this.writeTextToCanvas("Ik vul de gegevens in en zie wat de toekomst brengt.", 16, 855, 730);
-            this.writeTextToCanvas("Ik sluit de quiz en doe hier niet aan mee", 16, 810, 805);
-        }
+        this.drawUIRect(0, 0, 1920, 1080);
+        this.drawUIRect(30, 30, 400, 175);
+        this.drawUIRect(30, 225, 400, 825);
+        this.drawUIRect(600, 125, 375, 200);
+        this.drawUIRect(1400, 775, 375, 200);
+        this.drawUICircle(100, 300, "A");
+        this.drawUICircle(100, 480, "B");
+        this.drawUICircle(100, 660, "C");
+        this.drawUICircle(100, 840, "D");
+        this.writeTextToCanvas("Je doet online een quiz die de toekomst voorspelt. Echter vraagt de quiz om de naam", 18, 960, 670);
+        this.writeTextToCanvas("van je vader in te vullen en je geboortedatum. Wat doe je? ", 18, 860, 690);
+        this.writeTextToCanvas("Ik vul de gegevens in en zie wat de toekomst brengt.", 16, 855, 730);
+        this.writeTextToCanvas("Ik sluit de quiz en doe hier niet aan mee", 16, 810, 805);
     }
 }
 //# sourceMappingURL=Question.js.map
