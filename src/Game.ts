@@ -251,12 +251,17 @@ export default class Game {
    * Process inputs for different actions
    */
   public processInput(): void {
-    //Draws the fight ui when 'E' has been pressed and moves the background and characters to the right place.
+    //Draws the fight ui when 'E' has been pressed and moves the background and characters off screen.
     if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_E)) {
-      this.question.drawFightUI();
+      // this.ctx.drawImage(
+      //   this.enemy.img,
+      //   this.enemy.xPos = 0,
+      //   this.enemy.yPos = 0
+      // );
+      Question.drawFightUI();
     }
 
-    //Shows main game screen when 'Space' has been pressed.
+    //Shows main game screen when 'Space' has been pressed and moves the startscreen off screen.
     //Health and Score Ifs have been put in here so that you can't see your score and health on the intro screen.
     if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_SPACE)) {
       this.startScreen.xPos = -3000;

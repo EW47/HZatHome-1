@@ -1,4 +1,4 @@
-import KeyboardListener from "./KeyboardListener";
+import KeyboardListener from "./KeyboardListener.js";
 export default class Question {
     canvas = document.getElementById("canvas");
     ctx = this.canvas.getContext("2d");

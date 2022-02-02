@@ -11,7 +11,7 @@ interface CircleOptions {
   CusID: string;
 }
 
-import KeyboardListener from "./KeyboardListener";
+import KeyboardListener from "./KeyboardListener.js";
 
 export default class Question {
   private canvas = <HTMLCanvasElement>document.getElementById("canvas");
