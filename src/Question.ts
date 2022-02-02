@@ -98,7 +98,7 @@ export default class Question {
     YPos: number,
     width: number,
     length: number
-  ) {
+  ): void {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
@@ -120,7 +120,7 @@ export default class Question {
    * @param YPos - Vertical coordinate in pixels
    * @param CusID - Id of circle
    */
-  public static drawUICircle(XPos: number, YPos: number, CusID: string) {
+  public static drawUICircle(XPos: number, YPos: number, CusID: string): void {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
@@ -144,7 +144,7 @@ export default class Question {
     );
   }
 
-  public static drawFightUI() {
+  public static drawFightUI(): void {
     // Background
     this.drawUIRect(0, 0, 1920, 1080);
 

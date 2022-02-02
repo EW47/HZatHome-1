@@ -48,8 +48,8 @@ export default class KeyboardListener {
     this.keyCodeStates = new Array<boolean>();
     // Register the arrow methods as listeners to keyevents
     // There is a third event ('keypress'), but we do not need to use it
-    window.addEventListener("keydown", this.keyDown);
-    window.addEventListener("keyup", this.keyUp);
+    window.addEventListener("keydown", this.keyDown.bind(this));
+    window.addEventListener("keyup", this.keyUp.bind(this));
   }
 
   /**
