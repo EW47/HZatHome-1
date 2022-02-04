@@ -36,13 +36,13 @@ export default class Question {
         img.src = source;
         return img;
     }
-    static writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = "center", color = "black") {
+    writeTextToCanvas(text, fontSize = 20, xCoordinate, yCoordinate, alignment = "center", color = "black") {
         this.ctx.font = `${fontSize}px sans-serif`;
         this.ctx.fillStyle = color;
         this.ctx.textAlign = alignment;
         this.ctx.fillText(text, xCoordinate, yCoordinate);
     }
-    static drawUIRect(XPos, YPos, width, length) {
+    drawUIRect(XPos, YPos, width, length) {
         this.ctx.lineWidth = this.dflt / 135;
         this.ctx.fillStyle = "white";
         this.ctx.strokeStyle = "black";
@@ -51,7 +51,7 @@ export default class Question {
         this.ctx.fill();
         this.ctx.stroke();
     }
-    static drawUICircle(XPos, YPos, CusID) {
+    drawUICircle(XPos, YPos, CusID) {
         this.ctx.lineWidth = this.dflt / 135;
         this.ctx.fillStyle = "white";
         this.ctx.strokeStyle = "black";
@@ -63,7 +63,7 @@ export default class Question {
         this.ctx.font = `${this.dflt / 18}px Arial`;
         this.ctx.fillText(CusID, this.dflt / (1080 / XPos) - this.dflt / 54, this.dflt / (1080 / YPos) + this.dflt / 54);
     }
-    static drawFightUI() {
+    drawFightUI() {
         this.drawUIRect(0, 0, 1920, 1080);
         this.drawUIRect(30, 30, 400, 175);
         this.drawUIRect(30, 225, 400, 825);

@@ -1,5 +1,4 @@
 import KeyboardListener from "./KeyboardListener.js";
-import Question from "./Question.js";
 export default class Game {
     canvas;
     ctx;
@@ -116,7 +115,7 @@ export default class Game {
     }
     processInput() {
         if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_E)) {
-            Question.drawFightUI();
+            this.fquestion.drawFightUI();
         }
         if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_SPACE)) {
             this.startScreen.xPos = -3000;

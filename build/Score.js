@@ -1,8 +1,8 @@
-import Question from "./Question.js";
 export default class Score {
     canvas;
     ctx;
     score;
+    question;
     scoreBoard;
     constructor(canvasId) {
         this.canvas = canvasId;
@@ -18,7 +18,7 @@ export default class Score {
             this.scoreBoard.forEach((scoringItem) => {
                 scoringItem.draw();
             });
-            Question.writeTextToCanvas(`Score is: ${this.score}`, 20, this.canvas.width / 2, 40);
+            this.question.writeTextToCanvas(`Score is: ${this.score}`, 20, this.canvas.width / 2, 40);
         }
     }
     createScore(score) {
