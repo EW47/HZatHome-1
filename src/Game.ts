@@ -11,8 +11,10 @@ export default class Game {
   // KeyboardListener so the player can move
   private keyBoardListener: KeyboardListener;
 
+  // Importing things from Player
   private fplayer: Player
 
+  // Importing things from Question
   private fquestion: Question
 
   // Player
