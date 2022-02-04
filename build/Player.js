@@ -1,7 +1,7 @@
 import KeyboardListener from "./KeyboardListener.js";
 export default class Player {
     healthImage;
-    health;
+    health = 100;
     image;
     speed;
     xPosition;
@@ -19,9 +19,6 @@ export default class Player {
     }
     setHealthImage(healthImage) {
         this.healthImage = healthImage;
-    }
-    getHealth() {
-        return this.health;
     }
     setHealth(health) {
         this.health = health;
@@ -69,6 +66,12 @@ export default class Player {
         if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
             this.setyPosition(this.getyPosition() + this.getSpeed());
         }
+    }
+    lowerHealth(dmg) {
+        this.health = this.health - dmg;
+    }
+    getHealth() {
+        return this.health;
     }
     createPlayer(name) {
         return {

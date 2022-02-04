@@ -4,6 +4,8 @@ export default class Game {
     canvas;
     ctx;
     keyBoardListener;
+    fplayer;
+    fquestion;
     player;
     enemy;
     question;
@@ -119,7 +121,8 @@ export default class Game {
         if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_SPACE)) {
             this.startScreen.xPos = -3000;
             if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
-                this.writeTextToCanvas("Health: 90", 36, 1750, 50);
+                this.fplayer.lowerHealth(15);
+                this.writeTextToCanvas(`Health: ${this.fplayer.getHealth}`, 36, 1750, 50);
                 this.ctx.drawImage(this.incorrectAnswer.img, this.incorrectAnswer.xPos, this.incorrectAnswer.yPos);
             }
             else {

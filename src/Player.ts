@@ -3,7 +3,7 @@ import KeyboardListener from "./KeyboardListener.js";
 export default class Player {
   private healthImage: any;
 
-  private health: object;
+  private health: number = 100;
 
   private image: any;
 
@@ -33,11 +33,7 @@ export default class Player {
     this.healthImage = healthImage;
   }
 
-  public getHealth(): object {
-    return this.health;
-  }
-
-  public setHealth(health: object): void {
+  public setHealth(health: number): void {
     this.health = health;
   }
 
@@ -97,6 +93,14 @@ export default class Player {
     if (this.keyBoardListener.isKeyDown(KeyboardListener.KEY_DOWN)) {
       this.setyPosition(this.getyPosition() + this.getSpeed());
     }
+  }
+
+  public lowerHealth(dmg: number): void {
+    this.health = this.health - dmg
+  }
+
+  public getHealth(): number {
+    return this.health;
   }
 
   /**

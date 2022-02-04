@@ -7,6 +7,8 @@ export default class Score {
 
   private score: number;
 
+  private question: Question;
+
   private scoreBoard: Score[];
 
   public constructor(canvasId: HTMLCanvasElement) {
@@ -32,7 +34,7 @@ export default class Score {
       });
 
       // write the current score
-      Question.writeTextToCanvas(
+      this.question.writeTextToCanvas(
         `Score is: ${this.score}`,20,
         this.canvas.width / 2,
         40

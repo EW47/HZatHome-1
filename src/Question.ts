@@ -71,7 +71,7 @@ export default class Question {
     return img;
   }
 
-  public static writeTextToCanvas(
+  public writeTextToCanvas(
     text: string,
     fontSize: number = 20,
     xCoordinate: number,
@@ -93,7 +93,7 @@ export default class Question {
    * @param width - Width of rectangle
    * @param length - Length of rectangle
    */
-  public static drawUIRect(
+  public drawUIRect(
     XPos: number,
     YPos: number,
     width: number,
@@ -120,7 +120,7 @@ export default class Question {
    * @param YPos - Vertical coordinate in pixels
    * @param CusID - Id of circle
    */
-  public static drawUICircle(XPos: number, YPos: number, CusID: string): void {
+  public drawUICircle(XPos: number, YPos: number, CusID: string): void {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
@@ -144,7 +144,7 @@ export default class Question {
     );
   }
 
-  public static drawFightUI(): void {
+  public drawFightUI(): void {
     // Background
     this.drawUIRect(0, 0, 1920, 1080);
 

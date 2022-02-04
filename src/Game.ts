@@ -1,4 +1,5 @@
 import KeyboardListener from "./KeyboardListener.js";
+import Player from "./Player.js";
 import Question from "./Question.js";
 
 export default class Game {
@@ -9,6 +10,10 @@ export default class Game {
 
   // KeyboardListener so the player can move
   private keyBoardListener: KeyboardListener;
+
+  private fplayer: Player
+
+  private fquestion: Question
 
   // Player
   private player: any;
@@ -258,7 +263,7 @@ export default class Game {
       //   this.enemy.xPos = 0,
       //   this.enemy.yPos = 0
       // );
-      Question.drawFightUI();
+      this.fquestion.drawFightUI();
     }
 
     //Shows main game screen when 'Space' has been pressed and moves the startscreen off screen.
@@ -268,7 +273,8 @@ export default class Game {
 
       //Deducts Health when 'A' has been pressed. Otherwise show default Health. Also draws the incorrectAnswer image.
       if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
-        this.writeTextToCanvas("Health: 90", 36, 1750, 50);
+        this.fplayer.lowerHealth(15);
+        this.writeTextToCanvas(`Health: ${this.fplayer.getHealth}`, 36, 1750, 50);
         this.ctx.drawImage(
           this.incorrectAnswer.img,
           this.incorrectAnswer.xPos,
