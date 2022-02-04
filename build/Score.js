@@ -26,6 +26,9 @@ export default class Score {
             number: this.score,
         };
     }
+    addScore(score) {
+        this.score = this.score + score;
+    }
     getScore() {
         return this.score;
     }

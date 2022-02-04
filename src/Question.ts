@@ -78,7 +78,7 @@ export default class Question {
     yCoordinate: number,
     alignment: CanvasTextAlign = "center",
     color: string = "black"
-  ): void {
+  ): any {
     this.ctx.font = `${fontSize}px sans-serif`;
     this.ctx.fillStyle = color;
     this.ctx.textAlign = alignment;
@@ -98,7 +98,7 @@ export default class Question {
     YPos: number,
     width: number,
     length: number
-  ): void {
+  ): any {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
@@ -120,7 +120,7 @@ export default class Question {
    * @param YPos - Vertical coordinate in pixels
    * @param CusID - Id of circle
    */
-  public drawUICircle(XPos: number, YPos: number, CusID: string): void {
+  public drawUICircle(XPos: number, YPos: number, CusID: string): any {
     this.ctx.lineWidth = this.dflt / 135;
     this.ctx.fillStyle = "white";
     this.ctx.strokeStyle = "black";
@@ -144,7 +144,7 @@ export default class Question {
     );
   }
 
-  public drawFightUI(): void {
+  public drawFightUI(): any {
     // Background
     this.drawUIRect(0, 0, 1920, 1080);
 

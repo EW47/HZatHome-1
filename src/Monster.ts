@@ -86,6 +86,10 @@ export default class Monster {
     }
   }
 
+  public lowerHealth(dmg: number): any {
+    this.health = this.health - dmg
+  }
+
   protected static loadNewImage(source: string): HTMLImageElement {
     const img = new Image();
     img.src = source;

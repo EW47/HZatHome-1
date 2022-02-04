@@ -95,7 +95,7 @@ export default class Player {
     }
   }
 
-  public lowerHealth(dmg: number): void {
+  public lowerHealth(dmg: number): any {
     this.health = this.health - dmg
   }
 

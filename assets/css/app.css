@@ -109,6 +109,6 @@ body {
 }
 
 canvas {
-  /* background-image: url("./../img/background1.png"); in canvas*/
+  background-image: url("./../img/background1.png");
   background-color: gray;
 }

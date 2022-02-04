@@ -74,6 +74,10 @@ export default class Score {
     };
   }
 
+  public addScore(score: number): any {
+    this.score = this.score + score
+  }
+
   public getScore(): number {
     return this.score;
   }

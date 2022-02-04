@@ -58,6 +58,9 @@ export default class Monster {
             };
         }
     }
+    lowerHealth(dmg) {
+        this.health = this.health - dmg;
+    }
     static loadNewImage(source) {
         const img = new Image();
         img.src = source;
