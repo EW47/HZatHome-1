@@ -1,3 +1,4 @@
+import Question from "./Question.js";
 export default class Score {
     canvas;
     ctx;
@@ -17,13 +18,8 @@ export default class Score {
             this.scoreBoard.forEach((scoringItem) => {
                 scoringItem.draw();
             });
-            this.writeTextToCanvas(`Score is: ${this.score}`, this.canvas.width / 2, 40);
+            Question.writeTextToCanvas(`Score is: ${this.score}`, 20, this.canvas.width / 2, 40);
         }
-    }
-    writeTextToCanvas(text, xCoordinate, yCoordinate, fontSize = 20) {
-        const ctx = this.canvas.getContext("2d");
-        ctx.font = `${fontSize}px sans-serif`;
-        ctx.fillText(text, xCoordinate, yCoordinate);
     }
     createScore(score) {
         return {

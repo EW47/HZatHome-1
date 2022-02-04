@@ -1,3 +1,5 @@
+import Question from "./Question.js";
+
 export default class Score {
   private canvas: HTMLCanvasElement;
 
@@ -30,8 +32,8 @@ export default class Score {
       });
 
       // write the current score
-      this.writeTextToCanvas(
-        `Score is: ${this.score}`,
+      Question.writeTextToCanvas(
+        `Score is: ${this.score}`,20,
         this.canvas.width / 2,
         40
       );
@@ -48,16 +50,16 @@ export default class Score {
    * @param color - The color of the text
    * @param alignment - Where to align the text
    */
-  private writeTextToCanvas(
-    text: string,
-    xCoordinate: number,
-    yCoordinate: number,
-    fontSize: number = 20
-  ): void {
-    const ctx = this.canvas.getContext("2d");
-    ctx.font = `${fontSize}px sans-serif`;
-    ctx.fillText(text, xCoordinate, yCoordinate);
-  }
+  // private writeTextToCanvas(
+  //   text: string,
+  //   xCoordinate: number,
+  //   yCoordinate: number,
+  //   fontSize: number = 20
+  // ): void {
+  //   const ctx = this.canvas.getContext("2d");
+  //   ctx.font = `${fontSize}px sans-serif`;
+  //   ctx.fillText(text, xCoordinate, yCoordinate);
+  // }
 
   /**
    * Method to create the Score
