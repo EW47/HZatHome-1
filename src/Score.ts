@@ -35,7 +35,8 @@ export default class Score {
 
       // write the current score
       this.question.writeTextToCanvas(
-        `Score is: ${this.score}`,20,
+        `Score is: ${this.score}`,
+        20,
         this.canvas.width / 2,
         40
       );
@@ -75,7 +76,7 @@ export default class Score {
   }
 
   public addScore(score: number): any {
-    this.score = this.score + score
+    this.score = this.score + score;
   }
 
   public getScore(): number {

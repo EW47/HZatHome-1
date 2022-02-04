@@ -12,10 +12,10 @@ export default class Game {
   private keyBoardListener: KeyboardListener;
 
   // Importing things from Player
-  private fplayer: Player
+  private fplayer: Player;
 
   // Importing things from Question
-  private fquestion: Question
+  private fquestion: Question;
 
   // Player
   private player: any;
@@ -276,7 +276,12 @@ export default class Game {
       //Deducts Health when 'A' has been pressed. Otherwise show default Health. Also draws the incorrectAnswer image.
       if (this.keyBoardListener.isKeyUp(KeyboardListener.KEY_A)) {
         this.fplayer.lowerHealth(15);
-        this.writeTextToCanvas(`Health: ${this.fplayer.getHealth}`, 36, 1750, 50);
+        this.writeTextToCanvas(
+          `Health: ${this.fplayer.getHealth}`,
+          36,
+          1750,
+          50
+        );
         this.ctx.drawImage(
           this.incorrectAnswer.img,
           this.incorrectAnswer.xPos,
